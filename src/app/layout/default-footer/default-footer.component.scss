@@ -1,0 +1,30 @@
+.x-footer-container {
+  background: white;
+  padding: 5rem 3rem 3rem 3rem;
+
+  .x-footer {
+    height: 100%;
+
+    .x-footer-title-options {
+      .x-footer-option-title {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .x-footer-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #3563e9;
+  }
+
+  .x-footer-sub-title {
+    font-size: 1.1rem;
+  }
+
+  .x-footer-bottom-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+}

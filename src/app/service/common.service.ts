@@ -1,9 +1,4 @@
-import {
-  HttpHeaders,
-  HttpClient,
-  HttpParams,
-  HttpEvent,
-} from '@angular/common/http'
+import { HttpHeaders, HttpClient, HttpParams, HttpEvent } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, catchError, timeout, retry, of } from 'rxjs'
 import { environment } from '../../environments/environment'

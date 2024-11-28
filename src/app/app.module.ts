@@ -11,19 +11,12 @@ import { DashboardComponent } from './views/dashboard/dashboard.component'
 import { MessageService } from 'primeng/api'
 import { CommonService } from './service/common.service'
 import { GeoService } from './service/geo.service'
-import { HttpClientModule } from '@angular/common/http'
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ButtonModule,
-    ToastModule,
-  ],
-  providers: [MessageService, CommonService, GeoService],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        ButtonModule,
+        ToastModule], providers: [MessageService, CommonService, GeoService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {}

@@ -8,15 +8,47 @@
 }
 
 .x-card-body {
-  padding: 0 1rem;
+  padding: 1.5rem 1rem;
   line-height: 1.4;
 }
 
-:host ::ng-deep .p-card {
-  background: #54a6ff !important;
-  color: white !important;
+.x-ads-1,
+.x-ads-2 {
+  color: white;
+  border-radius: 10px;
 }
 
-.asd1 {
-  background: wheat !important;
+.x-ads-1 {
+  background: #54a6ff;
+}
+
+.x-ads-2 {
+  background: #3563e9;
+}
+
+.x-search {
+  background: white;
+  border-radius: 10px;
+  padding: 2rem 3rem;
+}
+
+.x-search-title {
+  font-weight: 600;
+}
+
+.x-search-btn {
+  margin: auto;
+}
+
+:host ::ng-deep .p-dropdown {
+  border: none !important;
+  width: 100%;
+}
+
+:host ::ng-deep .p-calendar .p-inputtext {
+  border-radius: 10px;
+}
+
+.country {
+  background: saddlebrown;
 }

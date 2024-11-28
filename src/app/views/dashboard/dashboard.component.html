@@ -1,26 +1,127 @@
 <div class="x-container">
-  <div class="x-ads flex gap-4">
-    <p-card class="col-12 md:col-6 sm:col-6">
+  <div class="x-ads grid gap-4 mb-5">
+    <div class="x-ads-1 col">
       <div class="x-card-body">
         <label class="x-ads-title">The Best Platform<br />for Car Rental</label>
         <p class="x-ads-sub-title mt-4">
           Ease of doing a car rental safely and<br />reliably. Of course at a
           low price.
         </p>
-        <button pButton pRipple>Rental Car</button>
+        <button pButton pRipple severity="primary">Rental Car</button>
+        <div class="flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="406"
+          />
+        </div>
       </div>
-    </p-card>
-    <p-card class="col-12 md:col-6 sm:col-6">
-      <div class="x-card-body asd2">
-        <label class="x-ads-title"
-          >Easy way to rent a<br />car at a low price</label
-        >
+    </div>
+    <div class="x-ads-2 col">
+      <div class="x-card-body">
+        <label class="x-ads-title">The Best Platform<br />for Car Rental</label>
         <p class="x-ads-sub-title mt-4">
-          Providing cheap car rental services<br />and safe and comfortable
-          facilities.
+          Ease of doing a car rental safely and<br />reliably. Of course at a
+          low price.
         </p>
-        <button pButton pRipple>Rental Car</button>
+        <button pButton pRipple severity="info">Rental Car</button>
+        <div class="flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-2.png"
+            alt="Image"
+            width="340"
+          />
+        </div>
       </div>
-    </p-card>
+    </div>
+  </div>
+
+  <div class="x-search mt-5 grid gap-1">
+    <div class="x-location col grid">
+      <label class="x-search-title col-12">Locations</label>
+      <p-dropdown
+        [options]="countries"
+        [(ngModel)]="selectedCountry"
+        optionLabel="name"
+        [filter]="true"
+        filterBy="name"
+        [showClear]="true"
+        placeholder="Select a Country"
+        class="col-12"
+      >
+        <ng-template pTemplate="selectedItem" let-selectedOption>
+          <div class="flex align-items-center gap-2">
+            <div>{{ selectedOption.name }}</div>
+          </div>
+        </ng-template>
+        <ng-template let-country pTemplate="item">
+          <div class="flex align-items-center gap-2">
+            <img
+              src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+              [class]="'flag flag-' + country.code.toLowerCase()"
+              style="width: 18px"
+            />
+            <div>{{ country.name }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    <div class="x-location col grid">
+      <label class="x-search-title col-12">Date</label>
+      <p-calendar
+        [(ngModel)]="date2"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        inputId="icondisplay"
+      />
+    </div>
+    <div class="x-location col grid">
+      <label class="x-search-title col-12">Time</label>
+      <p-calendar
+        inputId="calendar-timeonly"
+        [(ngModel)]="time"
+        [timeOnly]="true"
+      />
+    </div>
+    <div class="x-location col grid">
+      <label class="x-search-title col-12">Duration</label>
+      <p-dropdown
+        [options]="countries"
+        [(ngModel)]="selectedCountry"
+        [showClear]="true"
+        placeholder="Select Duration"
+        class="col-12"
+      >
+        <ng-template pTemplate="selectedItem" let-selectedOption>
+          <div class="flex align-items-center gap-2">
+            <div>{{ selectedOption.name }}</div>
+          </div>
+        </ng-template>
+        <ng-template let-country pTemplate="item">
+          <div class="flex align-items-center gap-2">
+            <img
+              src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
+              [class]="'flag flag-' + country.code.toLowerCase()"
+              style="width: 18px"
+            />
+            <div>{{ country.name }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    <div class="x-location grid col-fixed" style="width: 150px">
+      <label class="x-search-title col-12 opacity-0">Duration</label>
+      <div class="flex col">
+        <p-button
+          class="x-search-btn"
+          label="Search "
+          icon="pi pi-search"
+          iconPos="right"
+          severity="success"
+          [loading]="isLoading"
+          (onClick)="doSearch()"
+        />
+      </div>
+    </div>
   </div>
 </div>

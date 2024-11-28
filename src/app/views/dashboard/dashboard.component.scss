@@ -1,0 +1,22 @@
+.x-ads-title {
+  font-size: 2rem;
+}
+
+.x-ads-sub-title {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.x-card-body {
+  padding: 0 1rem;
+  line-height: 1.4;
+}
+
+:host ::ng-deep .p-card {
+  background: #54a6ff !important;
+  color: white !important;
+}
+
+.asd1 {
+  background: wheat !important;
+}

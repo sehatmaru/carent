@@ -11,7 +11,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component'
 import { MessageService } from 'primeng/api'
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

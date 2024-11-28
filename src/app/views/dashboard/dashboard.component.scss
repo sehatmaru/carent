@@ -40,6 +40,46 @@
   margin: auto;
 }
 
+.x-car-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(304px, 1fr));
+}
+
+.x-car-card {
+  background: white;
+  border-radius: 10px;
+
+  .x-title {
+    font-size: 1.2rem;
+  }
+
+  .x-sub-title {
+    font-size: 0.8rem;
+  }
+
+  .x-img {
+    margin: 4rem 0;
+  }
+
+  .x-info {
+    font-size: 0.9rem;
+    margin: auto 0;
+    text-wrap-mode: nowrap;
+  }
+
+  .x-price {
+    .x-price-title {
+      font-size: 1.2rem;
+      text-wrap-mode: nowrap;
+    }
+  }
+}
+
+.x-total-text {
+  font-size: 0.9rem;
+  margin: auto 0;
+}
+
 :host ::ng-deep .p-dropdown {
   border: none !important;
   width: 100%;
@@ -47,8 +87,4 @@
 
 :host ::ng-deep .p-calendar .p-inputtext {
   border-radius: 10px;
-}
-
-.country {
-  background: saddlebrown;
 }

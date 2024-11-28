@@ -46,7 +46,8 @@
         [filter]="true"
         filterBy="name"
         [showClear]="true"
-        placeholder="Select a Country"
+        [loading]="isLoading"
+        placeholder="Select Location"
         class="col-12"
       >
         <ng-template pTemplate="selectedItem" let-selectedOption>
@@ -113,7 +114,7 @@
       <label class="x-search-title col-12 opacity-0">Duration</label>
       <div class="flex col">
         <p-button
-          class="x-search-btn"
+          class="m-auto"
           label="Search "
           icon="pi pi-search"
           iconPos="right"
@@ -123,5 +124,667 @@
         />
       </div>
     </div>
+  </div>
+
+  <div class="x-recommended mt-5">
+    <div class="flex justify-content-between col">
+      <label class="font-medium gray-text">Popular Car</label>
+      <label class="pointer font-medium" style="color: #3563e9">View All</label>
+    </div>
+
+    <div class="x-car-container grid gap-5 mt-2">
+      <div class="x-car-card p-4 col pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i
+            class="pi pi-heart-fill"
+            style="color: #ed3f3f; font-size: 1.5rem"
+          ></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="flex gap-2">
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 col pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i
+            class="pi pi-heart-fill"
+            style="color: #ed3f3f; font-size: 1.5rem"
+          ></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="flex gap-2">
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 col pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="grid gap-2">
+          <div class="flex gap-1 col">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex flex-nowrap gap-1 col">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 col pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="grid gap-2">
+          <div class="flex gap-1 col">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex flex-nowrap gap-1 col">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 col pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="grid gap-2">
+          <div class="flex gap-1 col">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex flex-nowrap gap-1 col">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="x-recommended mt-5">
+    <div class="flex justify-content-between col">
+      <label class="font-medium gray-text">Recomendation Car</label>
+      <label class="pointer font-medium hidden" style="color: #3563e9"
+        >View All</label
+      >
+    </div>
+
+    <div class="x-car-container gap-5 mt-2">
+      <div class="x-car-card p-4 pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i
+            class="pi pi-heart-fill"
+            style="color: #ed3f3f; font-size: 1.5rem"
+          ></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="flex gap-2">
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="grid gap-2">
+          <div class="flex gap-1 col">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex flex-nowrap gap-1 col">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="grid gap-2">
+          <div class="flex gap-1 col">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex flex-nowrap gap-1 col">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="grid gap-2">
+          <div class="flex gap-1 col">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex flex-nowrap gap-1 col">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i
+            class="pi pi-heart-fill"
+            style="color: #ed3f3f; font-size: 1.5rem"
+          ></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="flex gap-2">
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="grid gap-2">
+          <div class="flex gap-1 col">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex flex-nowrap gap-1 col">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 col pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="grid gap-2">
+          <div class="flex gap-1 col">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex flex-nowrap gap-1 col">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 col pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="grid gap-2">
+          <div class="flex gap-1 col">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex flex-nowrap gap-1 col">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 col pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="grid gap-2">
+          <div class="flex gap-1 col">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex flex-nowrap gap-1 col">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      <div class="x-car-card p-4 col pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">Nissan GT-R</span>
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">Toyota</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-1.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="grid gap-2">
+          <div class="flex gap-1 col">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">4.5</span>
+          </div>
+          <div class="flex gap-1 col">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">Manual</span>
+          </div>
+          <div class="flex flex-nowrap gap-1 col">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">5 People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">Rp 200.000/</span>
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-content-between mt-5">
+    <span></span>
+    <p-button
+      class="m-auto"
+      label="Show more car "
+      iconPos="right"
+      severity="primary"
+      [loading]="isLoading"
+      (onClick)="doSearch()"
+    />
+    <span class="x-total-text gray-text">120 Car</span>
   </div>
 </div>

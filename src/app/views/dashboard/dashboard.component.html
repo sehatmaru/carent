@@ -40,13 +40,14 @@
     <div class="x-location col grid">
       <label class="x-search-title col-12">Locations</label>
       <p-dropdown
-        [options]="countries"
-        [(ngModel)]="selectedCountry"
+        [options]="provinceList"
+        [(ngModel)]="request.provinceId"
+        optionValue="id"
         optionLabel="name"
         [filter]="true"
         filterBy="name"
         [showClear]="true"
-        [loading]="isLoading"
+        [loading]="loadings.geo"
         placeholder="Select Location"
         class="col-12"
       >
@@ -55,60 +56,45 @@
             <div>{{ selectedOption.name }}</div>
           </div>
         </ng-template>
-        <ng-template let-country pTemplate="item">
-          <div class="flex align-items-center gap-2">
-            <img
-              src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-              [class]="'flag flag-' + country.code.toLowerCase()"
-              style="width: 18px"
-            />
-            <div>{{ country.name }}</div>
-          </div>
-        </ng-template>
       </p-dropdown>
     </div>
     <div class="x-location col grid">
       <label class="x-search-title col-12">Date</label>
       <p-calendar
-        [(ngModel)]="date2"
+        [(ngModel)]="request.startDate"
         [iconDisplay]="'input'"
         [showIcon]="true"
-        inputId="icondisplay"
+        [showButtonBar]="true"
+        [minDate]="minDate"
       />
     </div>
     <div class="x-location col grid">
       <label class="x-search-title col-12">Time</label>
       <p-calendar
-        inputId="calendar-timeonly"
-        [(ngModel)]="time"
+        [(ngModel)]="request.time"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
         [timeOnly]="true"
-      />
+      >
+        <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
+          <i
+            class="pi pi-clock pointer-events-none pointer-events-none"
+            (click)="clickCallBack($event)"
+          ></i>
+        </ng-template>
+      </p-calendar>
     </div>
     <div class="x-location col grid">
       <label class="x-search-title col-12">Duration</label>
-      <p-dropdown
-        [options]="countries"
-        [(ngModel)]="selectedCountry"
-        [showClear]="true"
-        placeholder="Select Duration"
-        class="col-12"
-      >
-        <ng-template pTemplate="selectedItem" let-selectedOption>
-          <div class="flex align-items-center gap-2">
-            <div>{{ selectedOption.name }}</div>
-          </div>
-        </ng-template>
-        <ng-template let-country pTemplate="item">
-          <div class="flex align-items-center gap-2">
-            <img
-              src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png"
-              [class]="'flag flag-' + country.code.toLowerCase()"
-              style="width: 18px"
-            />
-            <div>{{ country.name }}</div>
-          </div>
-        </ng-template>
-      </p-dropdown>
+      <p-iconField>
+        <p-inputNumber
+          [(ngModel)]="request.duration"
+          [min]="1"
+          [max]="30"
+          [useGrouping]="false"
+          suffix=" days"
+        />
+      </p-iconField>
     </div>
     <div class="x-location grid col-fixed" style="width: 150px">
       <label class="x-search-title col-12 opacity-0">Duration</label>
@@ -119,7 +105,8 @@
           icon="pi pi-search"
           iconPos="right"
           severity="success"
-          [loading]="isLoading"
+          [disabled]="!request.isValid()"
+          [loading]="loadings.geo"
           (onClick)="doSearch()"
         />
       </div>
@@ -782,7 +769,7 @@
       label="Show more car "
       iconPos="right"
       severity="primary"
-      [loading]="isLoading"
+      [loading]="loadings.geo"
       (onClick)="doSearch()"
     />
     <span class="x-total-text gray-text">120 Car</span>

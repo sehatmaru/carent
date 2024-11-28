@@ -9,6 +9,9 @@ import { ButtonModule } from 'primeng/button'
 import { ToastModule } from 'primeng/toast'
 import { DashboardComponent } from './views/dashboard/dashboard.component'
 import { MessageService } from 'primeng/api'
+import { CommonService } from './service/common.service'
+import { GeoService } from './service/tenant/geo.service'
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,10 +19,11 @@ import { MessageService } from 'primeng/api'
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     ButtonModule,
     ToastModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, CommonService, GeoService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

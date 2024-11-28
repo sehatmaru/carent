@@ -1,12 +1,19 @@
-import { Component } from '@angular/core'
+import { Component, inject, OnInit } from '@angular/core'
 import { CardModule } from 'primeng/card'
 import { ButtonModule } from 'primeng/button'
 import { RippleModule } from 'primeng/ripple'
 import { ImageModule } from 'primeng/image'
 import { DropdownModule } from 'primeng/dropdown'
 import { CalendarModule } from 'primeng/calendar'
+import { InputNumberModule } from 'primeng/inputnumber'
+import { IconFieldModule } from 'primeng/iconfield'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
+import { Utils } from 'src/app/utils/utils'
+import { GeoService } from 'src/app/service/tenant/geo.service'
+import { StatusCode } from 'src/app/enum/status-code.enum'
+import { GeoListResponseModel } from 'src/app/model/geo-model'
+import { ProductSearchRequestModel } from 'src/app/model/product-model'
 
 @Component({
   selector: 'app-dashboard',
@@ -21,31 +28,49 @@ import { FormsModule } from '@angular/forms'
     ImageModule,
     DropdownModule,
     CalendarModule,
+    InputNumberModule,
+    IconFieldModule,
   ],
   standalone: true,
 })
-export class DashboardComponent {
-  countries: any[] | undefined = [
-    { name: 'Australia', code: 'AU' },
-    { name: 'Brazil', code: 'BR' },
-    { name: 'China', code: 'CN' },
-    { name: 'Egypt', code: 'EG' },
-    { name: 'France', code: 'FR' },
-    { name: 'Germany', code: 'DE' },
-    { name: 'India', code: 'IN' },
-    { name: 'Japan', code: 'JP' },
-    { name: 'Spain', code: 'ES' },
-    { name: 'United States', code: 'US' },
-  ]
+export class DashboardComponent implements OnInit {
+  public geoService = inject(GeoService)
+  public utils = inject(Utils)
 
-  selectedCountry: string | undefined
+  public request = new ProductSearchRequestModel()
 
-  date2: Date | undefined
-  time: Date | undefined
+  public provinceList: GeoListResponseModel[] = []
+  public duration: GeoListResponseModel[] = []
 
-  isLoading = false
+  public minDate = new Date()
+
+  loadings = { geo: false }
+
+  ngOnInit(): void {
+    this.doGetProvinceList()
+  }
+
+  doGetProvinceList() {
+    this.loadings.geo = true
+
+    this.geoService.getProvinceList('').subscribe({
+      next: (resp) => {
+        if (resp.statusCode == StatusCode.SUCCESS) {
+          this.provinceList = resp.result
+        } else {
+          // this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
+        }
+
+        this.loadings.geo = false
+      },
+      error: (error) => {
+        // this.utils.sendErrorToast(error.message)
+        this.loadings.geo = false
+      },
+    })
+  }
 
   doSearch() {
-    this.isLoading = true
+    console.log(this.request)
   }
 }

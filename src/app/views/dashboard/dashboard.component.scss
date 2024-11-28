@@ -85,6 +85,14 @@
   width: 100%;
 }
 
-:host ::ng-deep .p-calendar .p-inputtext {
-  border-radius: 10px;
+// :host ::ng-deep .p-calendar {
+//   width: 80% !important;
+// }
+
+// :host ::ng-deep .p-calendar .p-inputtext {
+//   width: 80% !important;
+// }
+
+:host ::ng-deep .p-inputtext {
+  border-radius: 10px !important;
 }

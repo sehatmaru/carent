@@ -43,3 +43,8 @@
     margin: auto 0;
   }
 }
+
+:host ::ng-deep .p-inputtext {
+  border-radius: 30px !important;
+  width: 50vw !important;
+}

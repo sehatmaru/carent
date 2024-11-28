@@ -10,7 +10,7 @@ import { ToastModule } from 'primeng/toast'
 import { DashboardComponent } from './views/dashboard/dashboard.component'
 import { MessageService } from 'primeng/api'
 import { CommonService } from './service/common.service'
-import { GeoService } from './service/tenant/geo.service'
+import { GeoService } from './service/geo.service'
 import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({

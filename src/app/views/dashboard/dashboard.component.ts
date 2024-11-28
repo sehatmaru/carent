@@ -10,10 +10,14 @@ import { IconFieldModule } from 'primeng/iconfield'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { Utils } from 'src/app/utils/utils'
-import { GeoService } from 'src/app/service/tenant/geo.service'
+import { GeoService } from 'src/app/service/geo.service'
 import { StatusCode } from 'src/app/enum/status-code.enum'
 import { GeoListResponseModel } from 'src/app/model/geo-model'
-import { ProductSearchRequestModel } from 'src/app/model/product-model'
+import {
+  ProductListResponseModel,
+  ProductSearchRequestModel,
+} from 'src/app/model/product-model'
+import { ProductService } from 'src/app/service/product.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -34,20 +38,24 @@ import { ProductSearchRequestModel } from 'src/app/model/product-model'
   standalone: true,
 })
 export class DashboardComponent implements OnInit {
+  public productService = inject(ProductService)
   public geoService = inject(GeoService)
   public utils = inject(Utils)
 
   public request = new ProductSearchRequestModel()
 
+  public popularList: ProductListResponseModel[] = []
+  public recommendationList: ProductListResponseModel[] = []
   public provinceList: GeoListResponseModel[] = []
-  public duration: GeoListResponseModel[] = []
 
   public minDate = new Date()
 
-  loadings = { geo: false }
+  public loadings = { geo: false }
 
   ngOnInit(): void {
     this.doGetProvinceList()
+    this.doGetPopularList()
+    this.doGetRecommendationList()
   }
 
   doGetProvinceList() {
@@ -57,6 +65,46 @@ export class DashboardComponent implements OnInit {
       next: (resp) => {
         if (resp.statusCode == StatusCode.SUCCESS) {
           this.provinceList = resp.result
+        } else {
+          // this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
+        }
+
+        this.loadings.geo = false
+      },
+      error: (error) => {
+        // this.utils.sendErrorToast(error.message)
+        this.loadings.geo = false
+      },
+    })
+  }
+
+  doGetPopularList() {
+    this.loadings.geo = true
+
+    this.productService.getPopularList().subscribe({
+      next: (resp) => {
+        if (resp.statusCode == StatusCode.SUCCESS) {
+          this.popularList = resp.result
+        } else {
+          // this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
+        }
+
+        this.loadings.geo = false
+      },
+      error: (error) => {
+        // this.utils.sendErrorToast(error.message)
+        this.loadings.geo = false
+      },
+    })
+  }
+
+  doGetRecommendationList() {
+    this.loadings.geo = true
+
+    this.productService.getRecommendationList().subscribe({
+      next: (resp) => {
+        if (resp.statusCode == StatusCode.SUCCESS) {
+          this.recommendationList = resp.result
         } else {
           // this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
         }

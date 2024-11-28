@@ -25,4 +25,18 @@ export class ProductService {
       CommonResponse<Page<ProductListResponseModel[]>>
     >
   }
+
+  getPopularList(): Observable<CommonResponse<ProductListResponseModel[]>> {
+    return this.commonApi.get(`${this.root}/popular/list`) as Observable<
+      CommonResponse<ProductListResponseModel[]>
+    >
+  }
+
+  getRecommendationList(): Observable<
+    CommonResponse<ProductListResponseModel[]>
+  > {
+    return this.commonApi.get(`${this.root}/recommendation/list`) as Observable<
+      CommonResponse<ProductListResponseModel[]>
+    >
+  }
 }

@@ -66,6 +66,7 @@ export class ProductListResponseModel {
   public price = 0
   public quantity = 0
   public available = 0
+  public rating = 0
   public provinceName = ''
   public regencyName = ''
   public districtName = ''

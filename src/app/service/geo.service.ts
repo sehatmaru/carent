@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { CommonService } from '../common.service'
-import { CommonResponse } from '../../interface/common.interface'
-import { GeoListResponseModel } from '../../model/geo-model'
+import { CommonService } from './common.service'
+import { CommonResponse } from '../interface/common.interface'
+import { GeoListResponseModel } from '../model/geo-model'
 
 @Injectable({
   providedIn: 'root',

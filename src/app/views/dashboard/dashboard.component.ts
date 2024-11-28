@@ -86,13 +86,13 @@ export class DashboardComponent implements OnInit {
         if (resp.statusCode == StatusCode.SUCCESS) {
           this.popularList = resp.result
         } else {
-          // this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
+          this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
         }
 
         this.loadings.geo = false
       },
       error: (error) => {
-        // this.utils.sendErrorToast(error.message)
+        this.utils.sendErrorToast(error.message)
         this.loadings.geo = false
       },
     })
@@ -106,13 +106,13 @@ export class DashboardComponent implements OnInit {
         if (resp.statusCode == StatusCode.SUCCESS) {
           this.recommendationList = resp.result
         } else {
-          // this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
+          this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
         }
 
         this.loadings.geo = false
       },
       error: (error) => {
-        // this.utils.sendErrorToast(error.message)
+        this.utils.sendErrorToast(error.message)
         this.loadings.geo = false
       },
     })

@@ -74,6 +74,7 @@ export class ProductListResponseModel {
   public brand = VehicleBrand.BYD
   public engineType = EngineType.GASOLINE
   public deliverable = false
+  public isFavorite = false
   public status = ProductStatus.AVAILABLE
   public createdDate = new Date()
 }

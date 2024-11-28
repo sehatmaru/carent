@@ -1,11 +1,13 @@
 import { inject, Injectable } from '@angular/core'
 import { ToastType } from '../enum/toast-type.enum'
 import { StorageService } from '../service/storage.service'
+import { MessageService } from 'primeng/api'
 
 @Injectable({
   providedIn: 'root',
 })
 export class Utils {
+  private messageService = inject(MessageService)
   private storageService = inject(StorageService)
 
   constant: any
@@ -223,7 +225,19 @@ export class Utils {
     return dealerData
   }
 
-  isTenantManager(): boolean {
-    return this.storageService.isTenantManager()
+  sendErrorToast(message: string, title?: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Error ' + title,
+      detail: message,
+    })
+  }
+
+  sendSuccessToast(message: string, title: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: title,
+      detail: message,
+    })
   }
 }

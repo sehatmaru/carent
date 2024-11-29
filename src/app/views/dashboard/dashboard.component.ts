@@ -6,6 +6,7 @@ import { ImageModule } from 'primeng/image'
 import { DropdownModule } from 'primeng/dropdown'
 import { CalendarModule } from 'primeng/calendar'
 import { InputNumberModule } from 'primeng/inputnumber'
+import { SkeletonModule } from 'primeng/skeleton'
 import { IconFieldModule } from 'primeng/iconfield'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
@@ -35,6 +36,7 @@ import { PaginationRequestModel } from 'src/app/model/pagination-model'
     CalendarModule,
     InputNumberModule,
     IconFieldModule,
+    SkeletonModule,
   ],
   standalone: true,
 })
@@ -54,7 +56,12 @@ export class DashboardComponent implements OnInit {
 
   public minDate = new Date()
 
-  public loadings = { geo: false, productSearch: false }
+  public loadings = {
+    geo: false,
+    productSearch: false,
+    popularProduct: false,
+    recommendationProduct: false,
+  }
 
   ngOnInit(): void {
     this.doGetProvinceList()
@@ -83,7 +90,7 @@ export class DashboardComponent implements OnInit {
   }
 
   doGetPopularList() {
-    this.loadings.geo = true
+    this.loadings.popularProduct = true
 
     this.productService.getPopularList().subscribe({
       next: (resp) => {
@@ -93,17 +100,17 @@ export class DashboardComponent implements OnInit {
           this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
         }
 
-        this.loadings.geo = false
+        this.loadings.popularProduct = false
       },
       error: (error) => {
         this.utils.sendErrorToast(error.message)
-        this.loadings.geo = false
+        this.loadings.popularProduct = false
       },
     })
   }
 
   doGetRecommendationList() {
-    this.loadings.geo = true
+    this.loadings.recommendationProduct = true
 
     this.productService.getRecommendationList().subscribe({
       next: (resp) => {
@@ -113,11 +120,11 @@ export class DashboardComponent implements OnInit {
           this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
         }
 
-        this.loadings.geo = false
+        this.loadings.recommendationProduct = false
       },
       error: (error) => {
         this.utils.sendErrorToast(error.message)
-        this.loadings.geo = false
+        this.loadings.recommendationProduct = false
       },
     })
   }

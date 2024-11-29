@@ -50,6 +50,7 @@
         [loading]="loadings.geo"
         placeholder="Select Location"
         class="col-12"
+        [disabled]="loadings.productSearch"
       >
         <ng-template pTemplate="selectedItem" let-selectedOption>
           <div class="flex align-items-center gap-2">
@@ -68,6 +69,7 @@
         [minDate]="minDate"
         [numberOfMonths]="2"
         selectionMode="range"
+        [disabled]="loadings.productSearch"
       />
     </div>
     <div class="x-location col grid">
@@ -78,6 +80,7 @@
         [showIcon]="true"
         [timeOnly]="true"
         [hourFormat]="'12'"
+        [disabled]="loadings.productSearch"
       >
         <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
           <i
@@ -96,6 +99,7 @@
           [max]="30"
           [useGrouping]="false"
           suffix=" days"
+          [disabled]="loadings.productSearch"
         />
       </p-iconField>
     </div>
@@ -123,12 +127,33 @@
     </div>
 
     <div class="x-car-container grid gap-5 mt-2">
-      @for (item of popularList; track $index) {
+      @if (loadings.popularProduct) {
+      <div
+        *ngFor="let item of [1, 2, 3, 4, 5]"
+        class="x-car-card p-4 col pointer"
+      >
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton width="10rem" />
+          <p-skeleton width="2rem" />
+        </div>
+        <p-skeleton width="5rem" styleClass="mb-2" />
+        <p-skeleton width="10rem" height="8rem" styleClass="m-7" />
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton width="2rem" />
+          <p-skeleton width="5rem" />
+          <p-skeleton width="5rem" />
+        </div>
+        <p-skeleton height="2rem" styleClass="mb-2" />
+      </div>
+      } @else { @for (item of popularList; track $index) {
       <div class="x-car-card p-4 col pointer">
         <div class="x-car-title flex justify-content-between">
           <span class="x-title font-bold">{{ item.name }}</span>
-          @if (item.isFavorite) {
-          <i class="pi pi-heart" style="color: #ed3f3f; font-size: 1.5rem"></i>
+          @if (item.rating > 4.5) {
+          <i
+            class="pi pi-heart-fill"
+            style="color: #ed3f3f; font-size: 1.5rem"
+          ></i>
           } @else {
           <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
           }
@@ -173,7 +198,7 @@
           </div>
         </div>
       </div>
-      }
+      } }
     </div>
   </div>
 
@@ -186,12 +211,33 @@
     </div>
 
     <div class="x-car-container gap-5 mt-2">
-      @for (item of recommendationList; track $index) {
+      @if (loadings.recommendationProduct) {
+      <div
+        *ngFor="let item of [1, 2, 3, 4, 5]"
+        class="x-car-card p-4 col pointer"
+      >
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton width="10rem" />
+          <p-skeleton width="2rem" />
+        </div>
+        <p-skeleton width="5rem" styleClass="mb-2" />
+        <p-skeleton width="10rem" height="8rem" styleClass="m-7" />
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton width="2rem" />
+          <p-skeleton width="5rem" />
+          <p-skeleton width="5rem" />
+        </div>
+        <p-skeleton height="2rem" styleClass="mb-2" />
+      </div>
+      } @else { @for (item of recommendationList; track $index) {
       <div class="x-car-card p-4 col pointer">
         <div class="x-car-title flex justify-content-between">
           <span class="x-title font-bold">{{ item.name }}</span>
-          @if (item.isFavorite) {
-          <i class="pi pi-heart" style="color: #ed3f3f; font-size: 1.5rem"></i>
+          @if (item.rating > 4.5) {
+          <i
+            class="pi pi-heart-fill"
+            style="color: #ed3f3f; font-size: 1.5rem"
+          ></i>
           } @else {
           <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
           }
@@ -236,7 +282,7 @@
           </div>
         </div>
       </div>
-      }
+      } }
     </div>
   </div>
 

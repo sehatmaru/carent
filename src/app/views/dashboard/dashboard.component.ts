@@ -18,6 +18,7 @@ import {
   ProductSearchRequestModel,
 } from 'src/app/model/product-model'
 import { ProductService } from 'src/app/service/product.service'
+import { PaginationRequestModel } from 'src/app/model/pagination-model'
 
 @Component({
   selector: 'app-dashboard',
@@ -43,14 +44,17 @@ export class DashboardComponent implements OnInit {
   public utils = inject(Utils)
 
   public request = new ProductSearchRequestModel()
+  public pagination = new PaginationRequestModel()
 
+  public productSearchList: ProductListResponseModel[] = []
+  public dataPagination: any = {}
   public popularList: ProductListResponseModel[] = []
   public recommendationList: ProductListResponseModel[] = []
   public provinceList: GeoListResponseModel[] = []
 
   public minDate = new Date()
 
-  public loadings = { geo: false }
+  public loadings = { geo: false, productSearch: false }
 
   ngOnInit(): void {
     this.doGetProvinceList()
@@ -66,13 +70,13 @@ export class DashboardComponent implements OnInit {
         if (resp.statusCode == StatusCode.SUCCESS) {
           this.provinceList = resp.result
         } else {
-          // this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
+          this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
         }
 
         this.loadings.geo = false
       },
       error: (error) => {
-        // this.utils.sendErrorToast(error.message)
+        this.utils.sendErrorToast(error.message)
         this.loadings.geo = false
       },
     })
@@ -119,6 +123,25 @@ export class DashboardComponent implements OnInit {
   }
 
   doSearch() {
-    console.log(this.request)
+    this.request.startDate = this.request.dates[0]
+    this.request.endDate = this.request.dates[1]
+
+    this.loadings.productSearch = true
+
+    this.productService.searchProduct(this.request, this.pagination).subscribe({
+      next: (resp) => {
+        if (resp.statusCode == StatusCode.SUCCESS) {
+          this.dataPagination = resp.result
+        } else {
+          this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
+        }
+
+        this.loadings.productSearch = false
+      },
+      error: (error) => {
+        this.utils.sendErrorToast(error.message)
+        this.loadings.productSearch = false
+      },
+    })
   }
 }

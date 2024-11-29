@@ -227,7 +227,7 @@ export class Utils {
 
   sendErrorToast(message: string, title?: string) {
     this.messageService.add({
-      severity: 'success',
+      severity: 'error',
       summary: 'Error ' + title,
       detail: message,
     })

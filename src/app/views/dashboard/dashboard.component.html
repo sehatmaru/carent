@@ -61,11 +61,13 @@
     <div class="x-location col grid">
       <label class="x-search-title col-12">Date</label>
       <p-calendar
-        [(ngModel)]="request.startDate"
+        [(ngModel)]="request.dates"
         [iconDisplay]="'input'"
         [showIcon]="true"
         [showButtonBar]="true"
         [minDate]="minDate"
+        [numberOfMonths]="2"
+        selectionMode="range"
       />
     </div>
     <div class="x-location col grid">
@@ -75,6 +77,7 @@
         [iconDisplay]="'input'"
         [showIcon]="true"
         [timeOnly]="true"
+        [hourFormat]="'12'"
       >
         <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
           <i
@@ -106,7 +109,7 @@
           iconPos="right"
           severity="success"
           [disabled]="!request.isValid()"
-          [loading]="loadings.geo"
+          [loading]="loadings.productSearch"
           (onClick)="doSearch()"
         />
       </div>

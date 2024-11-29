@@ -22,6 +22,7 @@ export class ProductSearchRequestModel {
   public deliverable: false | null = null
   public status: ProductStatus | null = null
   public time: Date | null = null
+  public dates: Date[] = []
   public duration = 1
 
   resetRegency() {
@@ -39,7 +40,8 @@ export class ProductSearchRequestModel {
   isValid(): boolean {
     return (
       this.isTextValid(this.provinceId) &&
-      this.isDateValid(this.startDate) &&
+      this.dates[0] != null &&
+      this.dates[1] != null &&
       this.isDateValid(this.time) &&
       this.duration > 0
     )

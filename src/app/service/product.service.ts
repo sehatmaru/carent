@@ -18,12 +18,19 @@ export class ProductService {
 
   constructor(private commonApi: CommonService) {}
 
-  getProductList(
-    request: ProductSearchRequestModel
+  searchProduct(
+    request: ProductSearchRequestModel,
+    pagination: PaginationRequestModel
   ): Observable<CommonResponse<Page<ProductListResponseModel[]>>> {
-    return this.commonApi.post(`${this.root}/list`, request) as Observable<
-      CommonResponse<Page<ProductListResponseModel[]>>
-    >
+    const params = {
+      pageNum: 1,
+      pageSize: pagination.pageSize,
+    }
+
+    return this.commonApi.post(
+      `${this.root}/search?${this.commonApi.getSearchParams(params)}`,
+      request
+    ) as Observable<CommonResponse<Page<ProductListResponseModel[]>>>
   }
 
   getPopularList(): Observable<CommonResponse<ProductListResponseModel[]>> {

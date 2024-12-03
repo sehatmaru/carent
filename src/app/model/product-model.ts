@@ -61,6 +61,11 @@ export class ProductOptionListResponseModel {
   public name = ''
 }
 
+export class ProductSearchListResponseModel {
+  public total = 0
+  public list: ProductListResponseModel[] = []
+}
+
 export class ProductListResponseModel {
   public id = 0
   public seat = 0

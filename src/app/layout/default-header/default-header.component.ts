@@ -1,4 +1,5 @@
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
+import { Router } from '@angular/router'
 import { AvatarModule } from 'primeng/avatar'
 import { BadgeModule } from 'primeng/badge'
 import { IconFieldModule } from 'primeng/iconfield'
@@ -18,4 +19,10 @@ import { InputTextModule } from 'primeng/inputtext'
   ],
   standalone: true,
 })
-export class DefaultHeaderComponent {}
+export class DefaultHeaderComponent {
+  private router = inject(Router)
+
+  toDashboard() {
+    this.router.navigate(['/'])
+  }
+}

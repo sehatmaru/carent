@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { CommonService } from './common.service'
-import { CommonResponse, Page } from '../interface/common.interface'
+import { CommonResponse } from '../interface/common.interface'
 import {
   ProductSearchRequestModel,
   ProductListResponseModel,
-  ProductRegisterRequestModel,
-  ProductOptionListResponseModel,
+  ProductSearchListResponseModel,
 } from '../model/product-model'
-import { PaginationRequestModel } from '../model/pagination-model'
 
 @Injectable({
   providedIn: 'root',
@@ -20,17 +18,16 @@ export class ProductService {
 
   searchProduct(
     request: ProductSearchRequestModel,
-    pagination: PaginationRequestModel
-  ): Observable<CommonResponse<Page<ProductListResponseModel[]>>> {
+    limit: number
+  ): Observable<CommonResponse<ProductSearchListResponseModel>> {
     const params = {
-      pageNum: 1,
-      pageSize: pagination.pageSize,
+      limit: limit,
     }
 
     return this.commonApi.post(
       `${this.root}/search?${this.commonApi.getSearchParams(params)}`,
       request
-    ) as Observable<CommonResponse<Page<ProductListResponseModel[]>>>
+    ) as Observable<CommonResponse<ProductSearchListResponseModel>>
   }
 
   getPopularList(): Observable<CommonResponse<ProductListResponseModel[]>> {

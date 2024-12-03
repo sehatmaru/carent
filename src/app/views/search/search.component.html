@@ -1,0 +1,201 @@
+<div class="x-container">
+  <div class="x-search grid gap-1">
+    <div class="x-location col grid">
+      <label class="x-search-title col-12">Locations</label>
+      <p-dropdown
+        [options]="provinceList"
+        [(ngModel)]="request.provinceId"
+        optionValue="id"
+        optionLabel="name"
+        [filter]="true"
+        filterBy="name"
+        [showClear]="true"
+        [loading]="loadings.geo"
+        (ngModelChange)="request.provinceName = $event"
+        placeholder="Select Location"
+        class="col-12"
+        [disabled]="loadings.productSearch"
+      >
+        <ng-template pTemplate="selectedItem" let-selectedOption>
+          <div class="flex align-items-center gap-2">
+            <div>{{ selectedOption.name }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    <div class="x-location col grid">
+      <label class="x-search-title col-12">Date</label>
+      <p-calendar
+        [(ngModel)]="request.dates"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        [showButtonBar]="true"
+        [minDate]="minDate"
+        [numberOfMonths]="2"
+        selectionMode="range"
+        [disabled]="loadings.productSearch"
+      />
+    </div>
+    <div class="x-location col grid">
+      <label class="x-search-title col-12">Time</label>
+      <p-calendar
+        [(ngModel)]="request.time"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        [timeOnly]="true"
+        [hourFormat]="'12'"
+        [disabled]="loadings.productSearch"
+      >
+        <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
+          <i
+            class="pi pi-clock pointer-events-none pointer-events-none"
+            (click)="clickCallBack($event)"
+          ></i>
+        </ng-template>
+      </p-calendar>
+    </div>
+    <div class="x-location col grid">
+      <label class="x-search-title col-12">Duration</label>
+      <p-iconField>
+        <p-inputNumber
+          [(ngModel)]="request.duration"
+          [min]="1"
+          [max]="30"
+          [useGrouping]="false"
+          suffix=" days"
+          [disabled]="loadings.productSearch"
+        />
+      </p-iconField>
+    </div>
+    <div class="x-location grid col-fixed" style="width: 150px">
+      <label class="x-search-title col-12 opacity-0">Duration</label>
+      <div class="flex col">
+        <p-button
+          class="m-auto"
+          label="Search "
+          icon="pi pi-search"
+          iconPos="right"
+          severity="success"
+          [disabled]="!request.isValid()"
+          [loading]="loadings.productSearch"
+          (onClick)="searchLimit = 5; doSearch()"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="x-product mt-5">
+    @if (productSearchResponse.list.length == 0 && !loadings.productSearch) {
+    <div class="flex justify-content-between mt-5">
+      <span></span>
+      <div class="grid col">
+        <label class="x-not-found-title col-12 text-center"
+          >No car available</label
+        >
+        <label class="x-not-found-sub-title col-12 m-auto text-center"
+          >Try adjusting your filters to explore other cars.</label
+        >
+      </div>
+      <span></span>
+    </div>
+    }
+    <div class="x-car-container grid gap-5">
+      @if (loadings.productSearch) {
+      <div
+        *ngFor="let item of [1, 2, 3, 4, 5]"
+        class="x-car-card p-4 col pointer"
+      >
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton width="10rem" />
+          <p-skeleton width="2rem" />
+        </div>
+        <p-skeleton width="5rem" styleClass="mb-2" />
+        <p-skeleton width="10rem" height="8rem" styleClass="m-8" />
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton width="2rem" />
+          <p-skeleton width="5rem" />
+          <p-skeleton width="5rem" />
+        </div>
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton height="2.5rem" width="9rem" />
+          <p-skeleton height="2.5rem" width="7rem" />
+        </div>
+      </div>
+      } @else { @for (item of productSearchResponse.list; track $index) {
+      <div class="x-car-card p-4 col pointer">
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">{{ item.name }}</span>
+          @if (item.rating > 4.5) {
+          <i
+            class="pi pi-heart-fill"
+            style="color: #ed3f3f; font-size: 1.5rem"
+          ></i>
+          } @else {
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+          }
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">{{ item.brand }}</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-2.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="flex gap-2">
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">{{ item.rating }}</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">{{ item.transmission }}</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">{{ item.seat }} People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">
+              {{
+                item.price | currency : 'IDR' : 'symbol' : '1.0-0' : 'id'
+              }}/</span
+            >
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      } }
+    </div>
+  </div>
+
+  <div class="flex justify-content-between mt-5">
+    <span></span>
+    @if (productSearchResponse.list.length < productSearchResponse.total) {
+    <p-button
+      class="m-auto"
+      label="Show more car "
+      iconPos="right"
+      severity="primary"
+      [loading]="loadings.productSearch"
+      (onClick)="searchLimit = searchLimit + 5; doSearch()"
+    />
+    } @if (productSearchResponse.list.length > 0) {
+    <span class="x-total-text gray-text"
+      >{{ productSearchResponse.list.length }}/{{
+        productSearchResponse.total
+      }}
+      car</span
+    >
+    }
+  </div>
+</div>

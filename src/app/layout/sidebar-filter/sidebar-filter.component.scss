@@ -1,0 +1,34 @@
+.x-sidebar-container {
+  //   position: absolute;
+  background: white;
+  height: 100%;
+  width: 20vw;
+  left: -100%;
+  transition: transform 0.3s ease-in-out;
+  min-height: 100vh;
+
+  &.slide-in {
+    transform: translateX(100%);
+  }
+
+  &.slide-out {
+    transform: translateX(0);
+  }
+
+  .x-category-container {
+    .x-category-title {
+      font-size: 0.7rem;
+      color: #90a3bf;
+    }
+
+    .x-category-name {
+      color: #596780;
+      font-weight: 500;
+    }
+
+    .x-category-count {
+      color: #90a3bf;
+      font-weight: 500;
+    }
+  }
+}

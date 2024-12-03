@@ -1,3 +1,15 @@
 <app-default-header></app-default-header>
+@if (isFilterOn) {
+<div
+  [ngClass]="{
+    flex: isFilterOn,
+  }"
+>
+  <app-sidebar-filter></app-sidebar-filter>
+  <router-outlet />
+</div>
+} @else {
 <router-outlet />
+}
+
 <app-default-footer></app-default-footer>

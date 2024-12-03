@@ -2,10 +2,14 @@ import { Component, inject, OnInit } from '@angular/core'
 import { ProductService } from 'src/app/service/product.service'
 import { Utils } from 'src/app/utils/utils'
 import { CheckboxModule } from 'primeng/checkbox'
-import { ProductSearchRequestModel } from 'src/app/model/product-model'
+import {
+  ProductFilterCountListResponseModel,
+  ProductSearchRequestModel,
+} from 'src/app/model/product-model'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
+import { StatusCode } from 'src/app/enum/status-code.enum'
 
 @Component({
   selector: 'app-sidebar-filter',
@@ -22,6 +26,8 @@ export class SidebarFilterComponent implements OnInit {
 
   public request = new ProductSearchRequestModel()
 
+  public productFilter = new ProductFilterCountListResponseModel()
+
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.request.transmission = params['transmission']
@@ -30,6 +36,23 @@ export class SidebarFilterComponent implements OnInit {
       this.request.dates = [this.request.startDate, this.request.endDate]
       this.request.time = new Date(params['time'])
       this.request.duration = params['duration']
+    })
+
+    this.doGetProductFilterCount()
+  }
+
+  doGetProductFilterCount() {
+    this.productService.getProductFilterCount(this.request).subscribe({
+      next: (resp) => {
+        if (resp.statusCode == StatusCode.SUCCESS) {
+          this.productFilter = resp.result
+        } else {
+          this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
+        }
+      },
+      error: (error) => {
+        this.utils.sendErrorToast(error.message)
+      },
     })
   }
 

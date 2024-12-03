@@ -5,14 +5,14 @@
       <p-checkbox [(ngModel)]="request.transmission" value="MATIC" />
       <div class="flex gap-1">
         <label class="x-category-name">Matic</label>
-        <label class="x-category-count">(20)</label>
+        <label class="x-category-count">({{ productFilter.matic }})</label>
       </div>
     </div>
     <div class="flex gap-2 mt-3">
       <p-checkbox [(ngModel)]="request.transmission" value="MANUAL" />
       <div class="flex gap-1">
         <label class="x-category-name">Manual</label>
-        <label class="x-category-count">(2)</label>
+        <label class="x-category-count">({{ productFilter.manual }})</label>
       </div>
     </div>
   </div>

@@ -6,6 +6,7 @@ import {
   ProductSearchRequestModel,
   ProductListResponseModel,
   ProductSearchListResponseModel,
+  ProductFilterCountListResponseModel,
 } from '../model/product-model'
 
 @Injectable({
@@ -54,5 +55,14 @@ export class ProductService {
     return this.commonApi.get(`${this.root}/total`) as Observable<
       CommonResponse<number>
     >
+  }
+
+  getProductFilterCount(
+    request: ProductSearchRequestModel
+  ): Observable<CommonResponse<ProductFilterCountListResponseModel>> {
+    return this.commonApi.post(
+      `${this.root}/filter/count`,
+      request
+    ) as Observable<CommonResponse<ProductFilterCountListResponseModel>>
   }
 }

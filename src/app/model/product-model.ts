@@ -66,6 +66,29 @@ export class ProductSearchListResponseModel {
   public list: ProductListResponseModel[] = []
 }
 
+export class ProductFilterCountListResponseModel {
+  public matic = 0
+  public manual = 0
+  public fiveSeat = 0
+  public sevenSeat = 0
+  public toyota = 0
+  public honda = 0
+  public mazda = 0
+  public suzuki = 0
+  public hyundai = 0
+  public byd = 0
+  public mitsubishi = 0
+  public daihatsu = 0
+  public nissan = 0
+  public otherBrand = 0
+  public selfPickup = 0
+  public delivery = 0
+  public gasoline = 0
+  public hybrid = 0
+  public electric = 0
+  public diesel = 0
+}
+
 export class ProductListResponseModel {
   public id = 0
   public seat = 0

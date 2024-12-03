@@ -137,13 +137,16 @@
           <p-skeleton width="2rem" />
         </div>
         <p-skeleton width="5rem" styleClass="mb-2" />
-        <p-skeleton width="10rem" height="8rem" styleClass="m-7" />
+        <p-skeleton width="10rem" height="8rem" styleClass="m-8" />
         <div class="flex justify-content-between mb-2">
           <p-skeleton width="2rem" />
           <p-skeleton width="5rem" />
           <p-skeleton width="5rem" />
         </div>
-        <p-skeleton height="2rem" styleClass="mb-2" />
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton height="2.5rem" width="9rem" />
+          <p-skeleton height="2.5rem" width="7rem" />
+        </div>
       </div>
       } @else { @for (item of popularList; track $index) {
       <div class="x-car-card p-4 col pointer">
@@ -288,14 +291,16 @@
 
   <div class="flex justify-content-between mt-5">
     <span></span>
+    @if (recommendationList.length < totalProduct) {
     <p-button
       class="m-auto"
       label="Show more car "
       iconPos="right"
       severity="primary"
-      [loading]="loadings.geo"
-      (onClick)="doSearch()"
+      [loading]="loadings.recommendationProduct"
+      (onClick)="doGetRecommendationList()"
     />
-    <span class="x-total-text gray-text">120 Car</span>
+    }
+    <span class="x-total-text gray-text">{{ totalProduct }} car</span>
   </div>
 </div>

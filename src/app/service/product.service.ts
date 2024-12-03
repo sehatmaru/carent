@@ -39,11 +39,23 @@ export class ProductService {
     >
   }
 
-  getRecommendationList(): Observable<
-    CommonResponse<ProductListResponseModel[]>
-  > {
-    return this.commonApi.get(`${this.root}/recommendation/list`) as Observable<
-      CommonResponse<ProductListResponseModel[]>
+  getRecommendationList(
+    limit: number
+  ): Observable<CommonResponse<ProductListResponseModel[]>> {
+    const params = {
+      limit: limit,
+    }
+
+    return this.commonApi.get(
+      `${this.root}/recommendation/list?${this.commonApi.getSearchParams(
+        params
+      )}`
+    ) as Observable<CommonResponse<ProductListResponseModel[]>>
+  }
+
+  getTotalProduct(): Observable<CommonResponse<number>> {
+    return this.commonApi.get(`${this.root}/total`) as Observable<
+      CommonResponse<number>
     >
   }
 }

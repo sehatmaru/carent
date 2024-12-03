@@ -54,6 +54,9 @@ export class DashboardComponent implements OnInit {
   public recommendationList: ProductListResponseModel[] = []
   public provinceList: GeoListResponseModel[] = []
 
+  public totalProduct: number = 0
+  public recommendationLimit: number = 0
+
   public minDate = new Date()
 
   public loadings = {
@@ -67,6 +70,7 @@ export class DashboardComponent implements OnInit {
     this.doGetProvinceList()
     this.doGetPopularList()
     this.doGetRecommendationList()
+    this.doGetTotalProduct()
   }
 
   doGetProvinceList() {
@@ -110,21 +114,39 @@ export class DashboardComponent implements OnInit {
   }
 
   doGetRecommendationList() {
+    this.recommendationLimit += 10
     this.loadings.recommendationProduct = true
 
-    this.productService.getRecommendationList().subscribe({
+    this.productService
+      .getRecommendationList(this.recommendationLimit)
+      .subscribe({
+        next: (resp) => {
+          if (resp.statusCode == StatusCode.SUCCESS) {
+            this.recommendationList = resp.result
+          } else {
+            this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
+          }
+
+          this.loadings.recommendationProduct = false
+        },
+        error: (error) => {
+          this.utils.sendErrorToast(error.error.detail, error.error.title)
+          this.loadings.recommendationProduct = false
+        },
+      })
+  }
+
+  doGetTotalProduct() {
+    this.productService.getTotalProduct().subscribe({
       next: (resp) => {
         if (resp.statusCode == StatusCode.SUCCESS) {
-          this.recommendationList = resp.result
+          this.totalProduct = resp.result
         } else {
           this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
         }
-
-        this.loadings.recommendationProduct = false
       },
       error: (error) => {
-        this.utils.sendErrorToast(error.message)
-        this.loadings.recommendationProduct = false
+        this.utils.sendErrorToast(error.error.detail, error.error.title)
       },
     })
   }

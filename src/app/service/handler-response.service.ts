@@ -26,8 +26,6 @@ export class HandlerResponseService {
           this.router.navigateByUrl('/login')
         }
 
-        // this.snackbar.open(error.message, 'OK', { duration: 5000 })
-
         break
     }
 

@@ -80,7 +80,8 @@
   margin: auto 0;
 }
 
-:host ::ng-deep .p-inputtext {
+:host ::ng-deep .p-inputtext,
+:host ::ng-deep .p-dropdown {
   border-radius: 10px !important;
 }
 

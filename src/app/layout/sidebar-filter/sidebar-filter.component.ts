@@ -11,11 +11,22 @@ import { FormsModule } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { StatusCode } from 'src/app/enum/status-code.enum'
 import { SkeletonModule } from 'primeng/skeleton'
+import { InputNumberModule } from 'primeng/inputnumber'
+import { InputIconModule } from 'primeng/inputicon'
+import { IconFieldModule } from 'primeng/iconfield'
 
 @Component({
   selector: 'app-sidebar-filter',
   standalone: true,
-  imports: [CheckboxModule, CommonModule, FormsModule, SkeletonModule],
+  imports: [
+    CheckboxModule,
+    CommonModule,
+    FormsModule,
+    SkeletonModule,
+    InputNumberModule,
+    InputIconModule,
+    IconFieldModule,
+  ],
   templateUrl: './sidebar-filter.component.html',
   styleUrl: './sidebar-filter.component.scss',
 })
@@ -41,6 +52,8 @@ export class SidebarFilterComponent implements OnInit {
       this.request.time = new Date(params['time'])
       this.request.duration = params['duration']
       this.request.provinceId = params['location']
+      this.request.priceEnd = params['priceEnd']
+      this.request.priceStart = params['priceStart']
 
       this.request.transmission = params['transmission']
         ? params['transmission'].split('+')
@@ -88,6 +101,8 @@ export class SidebarFilterComponent implements OnInit {
         endDate: this.request.dates[1],
         time: this.request.time,
         duration: this.request.duration,
+        priceStart: this.request.priceStart,
+        priceEnd: this.request.priceEnd,
         transmission:
           this.request.transmission.length > 0
             ? this.request.transmission.join('+')

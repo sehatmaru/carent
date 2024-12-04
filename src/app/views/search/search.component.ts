@@ -21,6 +21,7 @@ import {
 import { ProductService } from 'src/app/service/product.service'
 import { PaginationRequestModel } from 'src/app/model/pagination-model'
 import { ActivatedRoute, Router } from '@angular/router'
+import { InputTextModule } from 'primeng/inputtext'
 
 @Component({
   selector: 'app-search',
@@ -38,6 +39,7 @@ import { ActivatedRoute, Router } from '@angular/router'
     InputNumberModule,
     IconFieldModule,
     SkeletonModule,
+    InputTextModule,
   ],
   standalone: true,
 })
@@ -73,6 +75,8 @@ export class SearchComponent implements OnInit {
       this.request.dates = [this.request.startDate, this.request.endDate]
       this.request.time = new Date(params['time'])
       this.request.duration = params['duration']
+      this.request.priceStart = params['priceStart']
+      this.request.priceEnd = params['priceEnd']
 
       this.request.transmission = params['transmission']
         ? params['transmission'].split('+')

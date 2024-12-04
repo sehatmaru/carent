@@ -38,6 +38,56 @@
     }
   </div>
   <div class="x-category-container mt-4">
+    <label class="x-category-title">PRICE</label>
+    <div class="mt-3">
+      <div class="mb-3">
+        <p-iconField iconPosition="right">
+          @if (!loadings.count && request.priceStart) {
+          <p-inputIcon
+            styleClass="pi pi-times pointer"
+            (click)="request.priceStart = null; updateParamQuery()"
+          />
+          }
+          <p-inputNumber
+            [(ngModel)]="request.priceStart"
+            maxFractionDigits="0"
+            inputId="currency-id"
+            mode="currency"
+            currency="IDR"
+            locale="id-ID"
+            placeholder="Minimum Price"
+            (onBlur)="updateParamQuery()"
+            (keydown.enter)="updateParamQuery()"
+            [disabled]="loadings.count"
+          />
+        </p-iconField>
+      </div>
+
+      <div>
+        <p-iconField iconPosition="right">
+          @if (!loadings.count && request.priceEnd) {
+          <p-inputIcon
+            styleClass="pi pi-times pointer"
+            (click)="request.priceEnd = null; updateParamQuery()"
+          />
+          }
+          <p-inputNumber
+            [(ngModel)]="request.priceEnd"
+            maxFractionDigits="0"
+            inputId="currency-id"
+            mode="currency"
+            currency="IDR"
+            locale="id-ID"
+            placeholder="Maximum Price"
+            (onBlur)="updateParamQuery()"
+            (keydown.enter)="updateParamQuery()"
+            [disabled]="loadings.count"
+          />
+        </p-iconField>
+      </div>
+    </div>
+  </div>
+  <div class="x-category-container mt-4">
     <label class="x-category-title">BRAND</label>
     @if (loadings.count) {
     <div *ngFor="let item of [1, 2, 3, 4]">

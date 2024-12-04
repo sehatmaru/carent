@@ -78,7 +78,7 @@
           severity="success"
           [disabled]="!request.isValid()"
           [loading]="loadings.productSearch"
-          (onClick)="searchLimit = 5; doSearch()"
+          (onClick)="searchLimit = 10; doSearch()"
         />
       </div>
     </div>
@@ -187,7 +187,7 @@
       iconPos="right"
       severity="primary"
       [loading]="loadings.productSearch"
-      (onClick)="searchLimit = searchLimit + 5; doSearch()"
+      (onClick)="searchLimit = searchLimit + 10; doSearch()"
     />
     } @if (productSearchResponse.list.length > 0) {
     <span class="x-total-text gray-text"

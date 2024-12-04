@@ -56,7 +56,7 @@ export class SearchComponent implements OnInit {
 
   public minDate = new Date()
 
-  public searchLimit = 5
+  public searchLimit = 10
 
   public loadings = {
     geo: false,
@@ -73,9 +73,23 @@ export class SearchComponent implements OnInit {
       this.request.dates = [this.request.startDate, this.request.endDate]
       this.request.time = new Date(params['time'])
       this.request.duration = params['duration']
-    })
 
-    this.doSearch()
+      this.request.transmission = params['transmission']
+        ? params['transmission'].split('+')
+        : []
+      this.request.brand = params['brand'] ? params['brand'].split('+') : []
+      this.request.capacity = params['capacity']
+        ? params['capacity'].split('+')
+        : []
+      this.request.engineType = params['engine']
+        ? params['engine'].split('+')
+        : []
+      this.request.deliverable = params['delivery']
+        ? params['delivery'].split('+')
+        : []
+
+      this.doSearch()
+    })
   }
 
   doGetProvinceList() {

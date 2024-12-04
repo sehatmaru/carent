@@ -1,19 +1,302 @@
 <div class="x-sidebar-container slide-in slide-out p-4">
   <div class="x-category-container mt-2">
     <label class="x-category-title">TRANSMISSION</label>
+    @if (loadings.count) {
+    <div *ngFor="let item of [1]">
+      <div class="flex gap-2 mt-3">
+        <p-skeleton width="1.5rem" height="1.5rem" />
+        <p-skeleton width="10rem" height="1.5rem" />
+      </div>
+      <div class="flex gap-2 mt-3">
+        <p-skeleton width="1.5rem" height="1.5rem" />
+        <p-skeleton width="7rem" height="1.5rem" />
+      </div>
+    </div>
+    } @else {
     <div class="flex gap-2 mt-3">
-      <p-checkbox [(ngModel)]="request.transmission" value="MATIC" />
+      <p-checkbox
+        [(ngModel)]="request.transmission"
+        value="MATIC"
+        (ngModelChange)="updateParamQuery()"
+      />
       <div class="flex gap-1">
         <label class="x-category-name">Matic</label>
         <label class="x-category-count">({{ productFilter.matic }})</label>
       </div>
     </div>
     <div class="flex gap-2 mt-3">
-      <p-checkbox [(ngModel)]="request.transmission" value="MANUAL" />
+      <p-checkbox
+        [(ngModel)]="request.transmission"
+        value="MANUAL"
+        (ngModelChange)="updateParamQuery()"
+      />
       <div class="flex gap-1">
         <label class="x-category-name">Manual</label>
         <label class="x-category-count">({{ productFilter.manual }})</label>
       </div>
     </div>
+    }
+  </div>
+  <div class="x-category-container mt-4">
+    <label class="x-category-title">BRAND</label>
+    @if (loadings.count) {
+    <div *ngFor="let item of [1, 2, 3, 4]">
+      <div class="flex gap-2 mt-3">
+        <p-skeleton width="1.5rem" height="1.5rem" />
+        <p-skeleton width="10rem" height="1.5rem" />
+      </div>
+      <div class="flex gap-2 mt-3">
+        <p-skeleton width="1.5rem" height="1.5rem" />
+        <p-skeleton width="7rem" height="1.5rem" />
+      </div>
+    </div>
+    } @else {
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.brand"
+        [value]="'TOYOTA'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Toyota</label>
+        <label class="x-category-count">({{ productFilter.toyota }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.brand"
+        [value]="'HONDA'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Honda</label>
+        <label class="x-category-count">({{ productFilter.honda }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.brand"
+        [value]="'HYUNDAI'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Hyundai</label>
+        <label class="x-category-count">({{ productFilter.hyundai }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.brand"
+        [value]="'MAZDA'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Mazda</label>
+        <label class="x-category-count">({{ productFilter.mazda }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.brand"
+        [value]="'BYD'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">BYD</label>
+        <label class="x-category-count">({{ productFilter.byd }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.brand"
+        [value]="'SUZUKI'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Suzuki</label>
+        <label class="x-category-count">({{ productFilter.suzuki }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.brand"
+        [value]="'MITSUBISHI'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Mitsubishi</label>
+        <label class="x-category-count">({{ productFilter.mitsubishi }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.brand"
+        [value]="'DAIHATSU'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Daihatsu</label>
+        <label class="x-category-count">({{ productFilter.daihatsu }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.brand"
+        [value]="'NISSAN'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Nissan</label>
+        <label class="x-category-count">({{ productFilter.nissan }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.brand"
+        [value]="'OTHER'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Other</label>
+        <label class="x-category-count">({{ productFilter.otherBrand }})</label>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="x-category-container mt-4">
+    <label class="x-category-title">CAPACITY</label>
+    @if (loadings.count) {
+    <div *ngFor="let item of [1]">
+      <div class="flex gap-2 mt-3">
+        <p-skeleton width="1.5rem" height="1.5rem" />
+        <p-skeleton width="10rem" height="1.5rem" />
+      </div>
+      <div class="flex gap-2 mt-3">
+        <p-skeleton width="1.5rem" height="1.5rem" />
+        <p-skeleton width="7rem" height="1.5rem" />
+      </div>
+    </div>
+    } @else {
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.capacity"
+        value="5"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">5 Seater</label>
+        <label class="x-category-count">({{ productFilter.fiveSeat }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.capacity"
+        value="7"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">7 Seater</label>
+        <label class="x-category-count">({{ productFilter.sevenSeat }})</label>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="x-category-container mt-4">
+    <label class="x-category-title">DELIVERY</label>
+    @if (loadings.count) {
+    <div *ngFor="let item of [1]">
+      <div class="flex gap-2 mt-3">
+        <p-skeleton width="1.5rem" height="1.5rem" />
+        <p-skeleton width="10rem" height="1.5rem" />
+      </div>
+      <div class="flex gap-2 mt-3">
+        <p-skeleton width="1.5rem" height="1.5rem" />
+        <p-skeleton width="7rem" height="1.5rem" />
+      </div>
+    </div>
+    } @else {
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.deliverable"
+        value="false"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Self Pickup</label>
+        <label class="x-category-count">({{ productFilter.selfPickup }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.deliverable"
+        value="true"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Deliverable</label>
+        <label class="x-category-count">({{ productFilter.delivery }})</label>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="x-category-container mt-4">
+    <label class="x-category-title">ENGINE</label>
+    @if (loadings.count) {
+    <div *ngFor="let item of [1, 2, 3, 4]">
+      <div class="flex gap-2 mt-3">
+        <p-skeleton width="1.5rem" height="1.5rem" />
+        <p-skeleton width="10rem" height="1.5rem" />
+      </div>
+      <div class="flex gap-2 mt-3">
+        <p-skeleton width="1.5rem" height="1.5rem" />
+        <p-skeleton width="7rem" height="1.5rem" />
+      </div>
+    </div>
+    } @else {
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.engineType"
+        [value]="'GASOLINE'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Gasoline</label>
+        <label class="x-category-count">({{ productFilter.gasoline }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.engineType"
+        [value]="'HYBRID'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Hybrid</label>
+        <label class="x-category-count">({{ productFilter.hybrid }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.engineType"
+        [value]="'ELECTRIC'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Electric</label>
+        <label class="x-category-count">({{ productFilter.electric }})</label>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-3">
+      <p-checkbox
+        [(ngModel)]="request.engineType"
+        [value]="'DIESEL'"
+        (ngModelChange)="updateParamQuery()"
+      />
+      <div class="flex gap-1">
+        <label class="x-category-name">Diesel</label>
+        <label class="x-category-count">({{ productFilter.diesel }})</label>
+      </div>
+    </div>
+    }
   </div>
 </div>

@@ -14,16 +14,17 @@ export class ProductSearchRequestModel {
   public regencyName: string | null = null
   public districtId: number | null = null
   public districtName: string | null = null
-  public transmission: Transmission.MATIC | null = null
-  public brand: VehicleBrand.BYD | null = null
-  public engineType: EngineType | null = null
+  public transmission: Transmission[] | any[] = []
+  public brand: VehicleBrand[] = []
+  public engineType: EngineType[] = []
   public startDate: Date | null = null
   public endDate: Date | null = null
-  public deliverable: false | null = null
+  public deliverable: boolean[] = []
   public status: ProductStatus | null = null
   public time: Date | null = null
   public dates: Date[] = []
   public duration = 1
+  public capacity: number[] = []
 
   resetRegency() {
     this.regencyId = null

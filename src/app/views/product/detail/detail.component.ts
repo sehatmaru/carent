@@ -1,32 +1,32 @@
-import { Component, inject, OnInit } from '@angular/core'
-import { CardModule } from 'primeng/card'
-import { ButtonModule } from 'primeng/button'
-import { RippleModule } from 'primeng/ripple'
-import { ImageModule } from 'primeng/image'
-import { DropdownModule } from 'primeng/dropdown'
-import { CalendarModule } from 'primeng/calendar'
-import { InputNumberModule } from 'primeng/inputnumber'
-import { SkeletonModule } from 'primeng/skeleton'
-import { IconFieldModule } from 'primeng/iconfield'
 import { CommonModule } from '@angular/common'
+import { Component, inject, OnInit } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import { Utils } from 'src/app/utils/utils'
-import { GeoService } from 'src/app/service/geo.service'
+import { Router, ActivatedRoute } from '@angular/router'
+import { ButtonModule } from 'primeng/button'
+import { CalendarModule } from 'primeng/calendar'
+import { CardModule } from 'primeng/card'
+import { DropdownModule } from 'primeng/dropdown'
+import { IconFieldModule } from 'primeng/iconfield'
+import { ImageModule } from 'primeng/image'
+import { InputNumberModule } from 'primeng/inputnumber'
+import { InputTextModule } from 'primeng/inputtext'
+import { RippleModule } from 'primeng/ripple'
+import { GalleriaModule } from 'primeng/galleria'
+import { SkeletonModule } from 'primeng/skeleton'
 import { StatusCode } from 'src/app/enum/status-code.enum'
 import { GeoListResponseModel } from 'src/app/model/geo-model'
-import {
-  ProductSearchListResponseModel,
-  ProductSearchRequestModel,
-} from 'src/app/model/product-model'
-import { ProductService } from 'src/app/service/product.service'
 import { PaginationRequestModel } from 'src/app/model/pagination-model'
-import { ActivatedRoute, Router } from '@angular/router'
-import { InputTextModule } from 'primeng/inputtext'
+import {
+  ProductSearchRequestModel,
+  ProductSearchListResponseModel,
+} from 'src/app/model/product-model'
+import { GeoService } from 'src/app/service/geo.service'
+import { ProductService } from 'src/app/service/product.service'
+import { Utils } from 'src/app/utils/utils'
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  selector: 'app-detail',
+  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -40,10 +40,12 @@ import { InputTextModule } from 'primeng/inputtext'
     IconFieldModule,
     SkeletonModule,
     InputTextModule,
+    GalleriaModule,
   ],
-  standalone: true,
+  templateUrl: './detail.component.html',
+  styleUrl: './detail.component.scss',
 })
-export class SearchComponent implements OnInit {
+export class DetailComponent implements OnInit {
   public productService = inject(ProductService)
   public geoService = inject(GeoService)
   public utils = inject(Utils)
@@ -55,6 +57,87 @@ export class SearchComponent implements OnInit {
 
   public productSearchResponse = new ProductSearchListResponseModel()
   public provinceList: GeoListResponseModel[] = []
+  public images = [
+    {
+      itemImageSrc: '../../../../assets/img/car-1.png',
+      thumbnailImageSrc: '../../../../assets/img/car-1.png',
+      alt: 'Description for Image 1',
+      title: 'Title 1',
+    },
+
+    {
+      itemImageSrc: '../../../../assets/img/car-2.png',
+      thumbnailImageSrc: '../../../../assets/img/car-2.png',
+      alt: 'Description for Image 1',
+      title: 'Title 1',
+    },
+    {
+      itemImageSrc: '../../../../assets/img/car-1.png',
+      thumbnailImageSrc: '../../../../assets/img/car-1.png',
+      alt: 'Description for Image 1',
+      title: 'Title 1',
+    },
+
+    {
+      itemImageSrc: '../../../../assets/img/car-2.png',
+      thumbnailImageSrc: '../../../../assets/img/car-2.png',
+      alt: 'Description for Image 1',
+      title: 'Title 1',
+    },
+    {
+      itemImageSrc: '../../../../assets/img/car-1.png',
+      thumbnailImageSrc: '../../../../assets/img/car-1.png',
+      alt: 'Description for Image 1',
+      title: 'Title 1',
+    },
+
+    {
+      itemImageSrc: '../../../../assets/img/car-2.png',
+      thumbnailImageSrc: '../../../../assets/img/car-2.png',
+      alt: 'Description for Image 1',
+      title: 'Title 1',
+    },
+    {
+      itemImageSrc: '../../../../assets/img/car-1.png',
+      thumbnailImageSrc: '../../../../assets/img/car-1.png',
+      alt: 'Description for Image 1',
+      title: 'Title 1',
+    },
+
+    {
+      itemImageSrc: '../../../../assets/img/car-2.png',
+      thumbnailImageSrc: '../../../../assets/img/car-2.png',
+      alt: 'Description for Image 1',
+      title: 'Title 1',
+    },
+  ]
+
+  get activeIndex(): number {
+    return this._activeIndex
+  }
+
+  set activeIndex(newValue) {
+    if (this.images && 0 <= newValue && newValue <= this.images.length - 1) {
+      this._activeIndex = newValue
+    }
+  }
+
+  _activeIndex: number = 2
+
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1024px',
+      numVisible: 5,
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 3,
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1,
+    },
+  ]
 
   public minDate = new Date()
 
@@ -158,8 +241,40 @@ export class SearchComponent implements OnInit {
   }
 
   toProductDetailPage(id: number) {
-    this.router.navigate(['/detail/' + id])
+    this.router.navigate(['/detail/' + id], {
+      queryParams: {
+        filter: true,
+        startDate: this.request.dates[0],
+        endDate: this.request.dates[1],
+        time: this.request.time,
+        duration: this.request.duration,
+        priceStart: this.request.priceStart,
+        priceEnd: this.request.priceEnd,
+        transmission:
+          this.request.transmission.length > 0
+            ? this.request.transmission.join('+')
+            : this.request.transmission[0],
+        capacity:
+          this.request.capacity.length > 0
+            ? this.request.capacity.join('+')
+            : this.request.capacity[0],
+        brand:
+          this.request.brand.length > 0
+            ? this.request.brand.join('+')
+            : this.request.brand[0],
+        delivery:
+          this.request.deliverable.length > 0
+            ? this.request.deliverable.join('+')
+            : this.request.deliverable[0],
+        engine:
+          this.request.engineType.length > 0
+            ? this.request.engineType.join('+')
+            : this.request.engineType[0],
+      },
+    })
 
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  onImageChange(a: any) {}
 }

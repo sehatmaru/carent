@@ -1,0 +1,11 @@
+.x-detail {
+  .x-detail-desc,
+  .x-carousel {
+    border-radius: 10px;
+  }
+
+  .x-carousel-thumbnail {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

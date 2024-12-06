@@ -8,6 +8,7 @@ import {
   ProductSearchListResponseModel,
   ProductFilterCountListResponseModel,
 } from '../model/product-model'
+import { ProductDetailResponse } from '../model/product-detail-response'
 
 @Injectable({
   providedIn: 'root',
@@ -64,5 +65,13 @@ export class ProductService {
       `${this.root}/filter/count`,
       request
     ) as Observable<CommonResponse<ProductFilterCountListResponseModel>>
+  }
+
+  getProductDetail(
+    productId: number
+  ): Observable<CommonResponse<ProductDetailResponse>> {
+    return this.commonApi.get(`${this.root}/detail/${productId}`) as Observable<
+      CommonResponse<ProductDetailResponse>
+    >
   }
 }

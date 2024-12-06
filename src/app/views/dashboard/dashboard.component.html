@@ -145,7 +145,10 @@
         </div>
       </div>
       } @else { @for (item of popularList; track $index) {
-      <div class="x-car-card p-4 col pointer">
+      <div
+        class="x-car-card p-4 col pointer"
+        (click)="toProductDetailPage(item.id)"
+      >
         <div class="x-car-title flex justify-content-between">
           <span class="x-title font-bold">{{ item.name }}</span>
           @if (item.rating > 4.5) {
@@ -229,7 +232,10 @@
         <p-skeleton height="2rem" styleClass="mb-2" />
       </div>
       } @else { @for (item of recommendationList; track $index) {
-      <div class="x-car-card p-4 col pointer">
+      <div
+        class="x-car-card p-4 col pointer"
+        (click)="toProductDetailPage(item.id)"
+      >
         <div class="x-car-title flex justify-content-between">
           <span class="x-title font-bold">{{ item.name }}</span>
           @if (item.rating > 4.5) {

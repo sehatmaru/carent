@@ -1,29 +1,81 @@
 <div class="x-container">
-  <div class="x-detail grid gap-6 grid-nogutter">
+  <div class="x-detail flex justify-content-center gap-6">
     <div class="x-carousel col-6">
-      <img
-        src="../../../assets/img/car-1.png"
-        alt="Image"
-        class="w-full"
-        style="height: 22rem"
-      />
-      <div class="x-carousel-thumbnail mt-4">
-        <img
-          src="../../../assets/img/car-1.png"
-          alt="Image"
-          class="w-full pointer"
-        />
-        <img
-          src="../../../assets/img/car-1.png"
-          alt="Image"
-          width="100%"
-          height="10rem"
-        />
-        <img src="../../../assets/img/car-1.png" alt="Image" width="100%" />
+      @if (loadings.productDetail) {
+      <p-skeleton styleClass="x-carousel-thumbnail-img" height="22rem" />
+      <div class="x-carousel-thumbnail mt-2">
+        <p-skeleton height="5rem" *ngFor="let item of [1, 2, 3, 4]" />
       </div>
+      } @else {
+      <div>
+        <img
+          [src]="selectedImage.srcUrl"
+          (click)="showFullImage()"
+          class="x-carousel-preview-img w-full rounded-10 pointer"
+          style="height: 22rem"
+        />
+        <div class="x-carousel-thumbnail mt-2">
+          @for (item of images; track $index) {
+          <img
+            class="x-carousel-thumbnail-img w-full pointer rounded-10"
+            [src]="item.srcUrl"
+            (click)="selectImage(item.id)"
+          />
+          }
+        </div>
+        <p-galleria
+          [value]="showImage"
+          [containerStyle]="{ 'max-width': '850px' }"
+          [circular]="true"
+          [fullScreen]="true"
+          [showItemNavigators]="false"
+          [showThumbnails]="false"
+        >
+          <ng-template pTemplate="item" let-item>
+            <img [src]="item.srcUrl" style="width: 100%; display: block" />
+          </ng-template>
+        </p-galleria>
+
+        <p-dialog
+          [modal]="true"
+          [(visible)]="isFullShow"
+          [style]="{ width: '25rem' }"
+        >
+          <ng-template pTemplate="headless">
+            <div class="p-4">
+              <div class="x-dialog-header flex justify-content-between">
+                <label>{{ productDetailResponse.name }}</label>
+                <i class="pi pi-times pointer" (click)="isFullShow = false"></i>
+              </div>
+              <div class="x-dialog-body">
+                <!-- TO DO -->
+              </div>
+            </div>
+          </ng-template>
+        </p-dialog>
+      </div>
+      }
     </div>
     <div class="x-detail-desc col-6">
-      <span>s</span>
+      @if (loadings.productDetail) {
+      <div class="x-card p-4 col">
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton width="10rem" />
+          <p-skeleton width="2rem" />
+        </div>
+        <p-skeleton width="5rem" styleClass="mb-2" />
+        <p-skeleton width="10rem" height="8rem" styleClass="m-8" />
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton width="2rem" />
+          <p-skeleton width="5rem" />
+          <p-skeleton width="5rem" />
+        </div>
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton height="2.5rem" width="9rem" />
+          <p-skeleton height="2.5rem" width="7rem" />
+        </div>
+      </div>
+      }
     </div>
   </div>
 </div>

@@ -167,4 +167,10 @@ export class DashboardComponent implements OnInit {
 
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  toProductDetailPage(id: number) {
+    this.router.navigate(['/detail/' + id])
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 }

@@ -14,6 +14,7 @@ export class ProductDetailResponse {
   public seat = ''
   public name = ''
   public price = 0
+  public review = 0
   public deliverable = false
   public rating = 0.0
 }

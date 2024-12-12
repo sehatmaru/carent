@@ -1,54 +1,75 @@
 <div class="x-container">
-  <div class="x-detail flex justify-content-center gap-6">
+  <div class="x-detail flex justify-content-center gap-4 mb-4">
     <div class="x-carousel col-6">
       @if (loadings.productDetail) {
-      <p-skeleton styleClass="x-carousel-thumbnail-img" height="22rem" />
+      <p-skeleton styleClass="x-carousel-thumbnail-img" height="32rem" />
       <div class="x-carousel-thumbnail mt-2">
-        <p-skeleton height="5rem" *ngFor="let item of [1, 2, 3, 4]" />
+        <p-skeleton height="7rem" *ngFor="let item of [1, 2, 3, 4]" />
       </div>
       } @else {
       <div>
         <img
           [src]="selectedImage.srcUrl"
-          (click)="showFullImage()"
+          (click)="isFullShow = true"
           class="x-carousel-preview-img w-full rounded-10 pointer"
-          style="height: 22rem"
+          style="height: 32rem"
         />
         <div class="x-carousel-thumbnail mt-2">
           @for (item of images; track $index) {
           <img
             class="x-carousel-thumbnail-img w-full pointer rounded-10"
             [src]="item.srcUrl"
+            [ngClass]="{ 'x-active': item.id === selectedImage.id }"
             (click)="selectImage(item.id)"
           />
           }
         </div>
-        <p-galleria
-          [value]="showImage"
-          [containerStyle]="{ 'max-width': '850px' }"
-          [circular]="true"
-          [fullScreen]="true"
-          [showItemNavigators]="false"
-          [showThumbnails]="false"
-        >
-          <ng-template pTemplate="item" let-item>
-            <img [src]="item.srcUrl" style="width: 100%; display: block" />
-          </ng-template>
-        </p-galleria>
 
         <p-dialog
           [modal]="true"
           [(visible)]="isFullShow"
-          [style]="{ width: '25rem' }"
+          [style]="{ width: '1100px' }"
         >
           <ng-template pTemplate="headless">
             <div class="p-4">
               <div class="x-dialog-header flex justify-content-between">
-                <label>{{ productDetailResponse.name }}</label>
-                <i class="pi pi-times pointer" (click)="isFullShow = false"></i>
+                <label style="font-size: 1.5rem">{{
+                  productDetailResponse.name
+                }}</label>
+                <i
+                  class="pi pi-times pointer"
+                  (click)="isFullShow = false"
+                  style="font-size: 1.5rem"
+                ></i>
               </div>
-              <div class="x-dialog-body">
-                <!-- TO DO -->
+              <div class="x-dialog-body mt-4">
+                <div class="x-dialog-body-img-preview">
+                  <i
+                    class="pi pi-chevron-left pointer m-auto"
+                    style="font-size: 1.5rem"
+                    (click)="previousPreviewImage()"
+                  ></i>
+                  <img
+                    [src]="selectedImage.srcUrl"
+                    class="x-carousel-preview-img rounded-10"
+                    style="max-width: 600px; max-height: 350px; margin: auto"
+                  />
+                  <i
+                    class="pi pi-chevron-right pointer m-auto"
+                    style="font-size: 1.5rem"
+                    (click)="nextPreviewImage()"
+                  ></i>
+                </div>
+                <div class="x-dialog-body-img-thumbnail mt-2">
+                  @for (item of images; track $index) {
+                  <img
+                    class="x-dialog-body-img-thumbnail-img w-full pointer rounded-10"
+                    [src]="item.srcUrl"
+                    [ngClass]="{ 'x-active': item.id === selectedImage.id }"
+                    (click)="selectImage(item.id)"
+                  />
+                  }
+                </div>
               </div>
             </div>
           </ng-template>
@@ -60,22 +81,159 @@
       @if (loadings.productDetail) {
       <div class="x-card p-4 col">
         <div class="flex justify-content-between mb-2">
-          <p-skeleton width="10rem" />
-          <p-skeleton width="2rem" />
+          <p-skeleton width="10rem" height="2rem" />
+          <p-skeleton width="2rem" height="2rem" />
         </div>
         <p-skeleton width="5rem" styleClass="mb-2" />
-        <p-skeleton width="10rem" height="8rem" styleClass="m-8" />
+        <p-skeleton height="8rem" styleClass="mb-4 mt-4" />
         <div class="flex justify-content-between mb-2">
-          <p-skeleton width="2rem" />
-          <p-skeleton width="5rem" />
-          <p-skeleton width="5rem" />
+          <p-skeleton width="14rem" height="2rem" />
+          <p-skeleton width="14rem" height="2rem" />
         </div>
-        <div class="flex justify-content-between mb-2">
+        <div class="flex justify-content-between mb-8">
+          <p-skeleton width="14rem" height="2rem" />
+          <p-skeleton width="14rem" height="2rem" />
+        </div>
+        <div class="flex justify-content-between">
+          <p-skeleton height="2.5rem" width="13rem" />
           <p-skeleton height="2.5rem" width="9rem" />
-          <p-skeleton height="2.5rem" width="7rem" />
+        </div>
+      </div>
+      } @else {
+      <div class="x-card p-4 flex justify-content-between flex-column h-full">
+        <div>
+          <div class="flex justify-content-between mb-2">
+            <span style="font-size: 1.5rem; font-weight: 500">{{
+              productDetailResponse.name
+            }}</span>
+            @if (productDetailResponse.rating > 4.5) {
+            <i
+              class="pi pi-heart-fill"
+              style="color: #ed3f3f; font-size: 1.5rem"
+            ></i>
+            } @else {
+            <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+            }
+          </div>
+          <div class="flex">
+            <p-rating
+              [(ngModel)]="productDetailResponse.rating"
+              [readonly]="true"
+              [cancel]="false"
+              style="padding: 0.1rem"
+            />
+            <label class="ml-3 mb-auto" style="color: #596780">{{
+              '500+ Reviewer'
+            }}</label>
+          </div>
+        </div>
+        <div class="mt-4 mb-4">
+          <span style="color: #596780; font-size: 20px; line-height: 2.5rem">{{
+            'NISMO has become the embodiment of Nissan outstanding performance, inspired by the most unforgiving proving ground, the race track.'
+          }}</span>
+        </div>
+        <div>
+          <div class="flex justify-content-between mb-4">
+            <span style="font-size: 20px; color: #90a3bf">Company</span>
+            <span style="font-size: 20px; color: #596780; font-weight: 500">{{
+              productDetailResponse.companyName
+            }}</span>
+            <!-- TO DO -->
+          </div>
+          <div class="x-detail-desc-spec mb-8">
+            <div class="flex justify-content-between">
+              <span class="x-detail-desc-spec-title">Brand</span>
+              <span class="x-detail-desc-spec-value">{{
+                productDetailResponse.brand
+              }}</span>
+            </div>
+            <div class="flex justify-content-between">
+              <span class="x-detail-desc-spec-title">Transmission</span>
+              <span class="x-detail-desc-spec-value">{{
+                productDetailResponse.transmission
+              }}</span>
+            </div>
+            <div class="flex justify-content-between">
+              <span class="x-detail-desc-spec-title">Engine</span>
+              <span class="x-detail-desc-spec-value">{{
+                productDetailResponse.engineType
+              }}</span>
+            </div>
+            <div class="flex justify-content-between">
+              <span class="x-detail-desc-spec-title">Capacity</span>
+              <span class="x-detail-desc-spec-value"
+                >{{ productDetailResponse.seat }} person</span
+              >
+            </div>
+          </div>
+          <div class="x-detail-price grid mt-2">
+            <div class="flex col m-auto">
+              <span class="x-detail-price-title font-bold">
+                {{
+                  productDetailResponse.price
+                    | currency : 'IDR' : 'symbol' : '1.0-0' : 'id'
+                }}/</span
+              >
+              <span class="gray-text" style="font-size: 13px; margin-top: auto"
+                >day</span
+              >
+            </div>
+            <div class="col flex justify-content-end">
+              <p-button label="Rent Now " severity="primary" size="large" />
+            </div>
+          </div>
         </div>
       </div>
       }
+    </div>
+  </div>
+  <div class="x-review rounded-10 flex justify-content-center gap-6 mb-4">
+    <div class="x-card col-12 p-4">
+      <div class="flex mb-4" style="font-size: 20px">
+        <span style="font-weight: 500; margin: auto 0">Reviews</span>
+        <p-badge value="13" class="ml-2 mb-1" />
+      </div>
+      <div class="x-review-card">
+        @for (item of reviews; track $index) {
+        <div class="x-review-card-detail mb-4">
+          <p-avatar
+            [image]="item.imgSrc"
+            class="mr-2"
+            size="xlarge"
+            shape="circle"
+          />
+          <div>
+            <div class="flex justify-content-between mb-2">
+              <span style="font-size: 20px; font-weight: 500">{{
+                item.name
+              }}</span>
+              <span style="color: #90a3bf">{{
+                item.reviewDate | date : 'longDate'
+              }}</span>
+            </div>
+            <p-rating
+              [(ngModel)]="item.rating"
+              [readonly]="true"
+              [cancel]="false"
+              class="flex mb-2"
+            />
+            <span class="flex" style="color: #596780; line-height: 1.5rem">{{
+              item.review
+            }}</span>
+          </div>
+        </div>
+        }
+        <div class="flex justify-content-center">
+          <div class="pointer">
+            <span style="color: #90a3bf">Show All</span>
+            <i
+              class="pi pi-chevron-down pointer ml-2 mt-auto mb-auto"
+              style="color: #90a3bf"
+              (click)="previousPreviewImage()"
+            ></i>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -14,10 +14,13 @@ import { RippleModule } from 'primeng/ripple'
 import { GalleriaModule } from 'primeng/galleria'
 import { SkeletonModule } from 'primeng/skeleton'
 import { DialogModule } from 'primeng/dialog'
+import { RatingModule } from 'primeng/rating'
+import { BadgeModule } from 'primeng/badge'
 import { ProductService } from 'src/app/service/product.service'
 import { Utils } from 'src/app/utils/utils'
 import { StatusCode } from 'src/app/enum/status-code.enum'
 import { ProductDetailResponse } from 'src/app/model/product-detail-response'
+import { AvatarModule } from 'primeng/avatar'
 
 @Component({
   selector: 'app-detail',
@@ -37,6 +40,9 @@ import { ProductDetailResponse } from 'src/app/model/product-detail-response'
     InputTextModule,
     GalleriaModule,
     DialogModule,
+    RatingModule,
+    BadgeModule,
+    AvatarModule,
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss',
@@ -55,13 +61,11 @@ export class DetailComponent implements OnInit {
 
   public isFullShow = false
 
-  public showImage: any[] = []
-
   public images = [
     {
       id: 1,
-      srcUrl: '../../../../assets/img/white.jpg',
-      thumbnailUrl: '../../../../assets/img/white.jpg',
+      srcUrl: '../../../../assets/img/black-2.png',
+      thumbnailUrl: '../../../../assets/img/black-2.png',
     },
     {
       id: 2,
@@ -70,13 +74,36 @@ export class DetailComponent implements OnInit {
     },
     {
       id: 3,
-      srcUrl: '../../../../assets/img/black.jpg',
-      thumbnailUrl: '../../../../assets/img/black.jpg',
+      srcUrl: '../../../../assets/img/white.jpg',
+      thumbnailUrl: '../../../../assets/img/white.jpg',
     },
     {
       id: 4,
       srcUrl: '../../../../assets/img/car-2.png',
       thumbnailUrl: '../../../../assets/img/car-2.png',
+    },
+  ]
+
+  public reviews = [
+    {
+      id: 1,
+      name: 'Alex',
+      reviewDate: new Date(),
+      rating: 4,
+      imgSrc:
+        'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png',
+      review:
+        'We are very happy with the service from the CARENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+    },
+    {
+      id: 2,
+      name: 'Morgan',
+      reviewDate: new Date(),
+      rating: 5,
+      imgSrc:
+        'https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png',
+      review:
+        'We are greatly helped by the services of the CARENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
     },
   ]
 
@@ -115,15 +142,18 @@ export class DetailComponent implements OnInit {
   }
 
   selectImage(id: number) {
-    this.showImage = []
     this.selectedImage = this.images.filter((e) => e.id == id)[0]
-    this.showImage.push(this.selectedImage)
   }
 
-  showFullImage() {
-    this.isFullShow = true
+  nextPreviewImage() {
+    if (this.selectedImage.id != this.images.length) {
+      this.selectImage(this.selectedImage.id + 1)
+    }
+  }
 
-    this.showImage = []
-    this.showImage.push(this.selectedImage)
+  previousPreviewImage() {
+    if (this.selectedImage.id != 1) {
+      this.selectImage(this.selectedImage.id - 1)
+    }
   }
 }

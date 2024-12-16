@@ -9,6 +9,7 @@ import {
   ProductFilterCountListResponseModel,
 } from '../model/product-model'
 import { ProductDetailResponse } from '../model/product-detail-response'
+import { ProductReviewListResponse } from '../model/product-review-list-response'
 
 @Injectable({
   providedIn: 'root',
@@ -32,10 +33,16 @@ export class ProductService {
     ) as Observable<CommonResponse<ProductSearchListResponseModel>>
   }
 
-  getPopularList(): Observable<CommonResponse<ProductListResponseModel[]>> {
-    return this.commonApi.get(`${this.root}/popular/list`) as Observable<
-      CommonResponse<ProductListResponseModel[]>
-    >
+  getPopularList(
+    size: number
+  ): Observable<CommonResponse<ProductListResponseModel[]>> {
+    const params = {
+      limit: size,
+    }
+
+    return this.commonApi.get(
+      `${this.root}/popular/list?${this.commonApi.getSearchParams(params)}`
+    ) as Observable<CommonResponse<ProductListResponseModel[]>>
   }
 
   getRecommendationList(
@@ -73,5 +80,13 @@ export class ProductService {
     return this.commonApi.get(`${this.root}/detail/${productId}`) as Observable<
       CommonResponse<ProductDetailResponse>
     >
+  }
+
+  getProductReviews(
+    productId: number
+  ): Observable<CommonResponse<ProductReviewListResponse[]>> {
+    return this.commonApi.get(
+      `${this.root}/detail/reviews/${productId}`
+    ) as Observable<CommonResponse<ProductReviewListResponse[]>>
   }
 }

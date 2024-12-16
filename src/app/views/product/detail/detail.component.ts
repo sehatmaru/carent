@@ -16,11 +16,14 @@ import { SkeletonModule } from 'primeng/skeleton'
 import { DialogModule } from 'primeng/dialog'
 import { RatingModule } from 'primeng/rating'
 import { BadgeModule } from 'primeng/badge'
+import { FieldsetModule } from 'primeng/fieldset'
 import { ProductService } from 'src/app/service/product.service'
 import { Utils } from 'src/app/utils/utils'
 import { StatusCode } from 'src/app/enum/status-code.enum'
 import { ProductDetailResponse } from 'src/app/model/product-detail-response'
 import { AvatarModule } from 'primeng/avatar'
+import { ProductListResponseModel } from 'src/app/model/product-model'
+import { ProductReviewListResponse } from 'src/app/model/product-review-list-response'
 
 @Component({
   selector: 'app-detail',
@@ -43,6 +46,7 @@ import { AvatarModule } from 'primeng/avatar'
     RatingModule,
     BadgeModule,
     AvatarModule,
+    FieldsetModule,
   ],
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss',
@@ -54,6 +58,9 @@ export class DetailComponent implements OnInit {
   public activatedRoute = inject(ActivatedRoute)
 
   public productDetailResponse = new ProductDetailResponse()
+
+  public popularList: ProductListResponseModel[] = []
+  public reviewList: ProductReviewListResponse[] = []
 
   public productId: number | null = null
 
@@ -109,15 +116,19 @@ export class DetailComponent implements OnInit {
 
   public loadings = {
     productDetail: false,
+    popularProduct: false,
+    productReviews: false,
   }
 
   ngOnInit(): void {
     this.selectedImage = this.images[0]
+    this.doGetPopularList()
 
     this.activatedRoute.params.subscribe((params) => {
       this.productId = Number(params['id'])
 
       this.doGetProductDetail()
+      this.doGetProductReviewList()
     })
   }
 
@@ -141,6 +152,46 @@ export class DetailComponent implements OnInit {
     })
   }
 
+  doGetPopularList() {
+    this.loadings.popularProduct = true
+
+    this.productService.getPopularList(3).subscribe({
+      next: (resp) => {
+        if (resp.statusCode == StatusCode.SUCCESS) {
+          this.popularList = resp.result
+        } else {
+          this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
+        }
+
+        this.loadings.popularProduct = false
+      },
+      error: (error) => {
+        this.utils.sendErrorToast(error.message)
+        this.loadings.popularProduct = false
+      },
+    })
+  }
+
+  doGetProductReviewList() {
+    this.loadings.productReviews = true
+
+    this.productService.getProductReviews(this.productId!!).subscribe({
+      next: (resp) => {
+        if (resp.statusCode == StatusCode.SUCCESS) {
+          this.reviewList = resp.result
+        } else {
+          this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
+        }
+
+        this.loadings.productReviews = false
+      },
+      error: (error) => {
+        this.utils.sendErrorToast(error.message)
+        this.loadings.productReviews = false
+      },
+    })
+  }
+
   selectImage(id: number) {
     this.selectedImage = this.images.filter((e) => e.id == id)[0]
   }
@@ -155,5 +206,11 @@ export class DetailComponent implements OnInit {
     if (this.selectedImage.id != 1) {
       this.selectImage(this.selectedImage.id - 1)
     }
+  }
+
+  toProductDetailPage(id: number) {
+    this.router.navigate(['/detail/' + id])
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }

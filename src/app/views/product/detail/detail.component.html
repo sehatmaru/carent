@@ -77,7 +77,7 @@
       </div>
       }
     </div>
-    <div class="x-detail-desc col-6">
+    <div class="x-detail-desc col-6 rounded-10">
       @if (loadings.productDetail) {
       <div class="x-card p-4 col">
         <div class="flex justify-content-between mb-2">
@@ -187,11 +187,12 @@
       }
     </div>
   </div>
+
   <div class="x-review rounded-10 flex justify-content-center gap-6 mb-4">
     <div class="x-card col-12 p-4">
       <div class="flex mb-4" style="font-size: 20px">
         <span style="font-weight: 500; margin: auto 0">Reviews</span>
-        <p-badge value="13" class="ml-2 mb-1" />
+        <p-badge [value]="reviewList.length" class="ml-2 mb-1" />
       </div>
       <div class="x-review-card">
         @for (item of reviews; track $index) {
@@ -234,6 +235,91 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div style="max-width: 71.5rem; margin: auto">
+    <div class="flex justify-content-between col">
+      <label class="font-medium gray-text">Popular Car</label>
+      <label class="pointer font-medium" style="color: #3563e9">View All</label>
+    </div>
+
+    <div class="x-car-container grid gap-5 mt-2">
+      @if (loadings.popularProduct) {
+      <div *ngFor="let item of [1, 2, 3]" class="x-car-card p-4 col pointer">
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton width="10rem" />
+          <p-skeleton width="2rem" />
+        </div>
+        <p-skeleton width="5rem" styleClass="mb-2" />
+        <p-skeleton width="10rem" height="8rem" styleClass="m-8" />
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton width="2rem" />
+          <p-skeleton width="5rem" />
+          <p-skeleton width="5rem" />
+        </div>
+        <div class="flex justify-content-between mb-2">
+          <p-skeleton height="2.5rem" width="9rem" />
+          <p-skeleton height="2.5rem" width="7rem" />
+        </div>
+      </div>
+      } @else { @for (item of popularList; track $index) {
+      <div
+        class="x-car-card p-4 col pointer"
+        (click)="toProductDetailPage(item.id)"
+      >
+        <div class="x-car-title flex justify-content-between">
+          <span class="x-title font-bold">{{ item.name }}</span>
+          @if (item.rating > 4.5) {
+          <i
+            class="pi pi-heart-fill"
+            style="color: #ed3f3f; font-size: 1.5rem"
+          ></i>
+          } @else {
+          <i class="pi pi-heart gray-text" style="font-size: 1.5rem"></i>
+          }
+        </div>
+        <div>
+          <span class="x-sub-title font-bold gray-text">{{ item.brand }}</span>
+        </div>
+        <div class="x-img flex justify-content-center">
+          <p-image
+            src="../../../assets/img/car-2.png"
+            alt="Image"
+            width="204"
+          />
+        </div>
+        <div class="flex gap-2">
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-star-fill gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">{{ item.rating }}</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-gauge gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">{{ item.transmission }}</span>
+          </div>
+          <div class="flex gap-1 col justify-content-center">
+            <i class="pi pi-users gray-text" style="font-size: 1.2rem"></i>
+            <span class="x-info gray-text">{{ item.seat }} People</span>
+          </div>
+        </div>
+        <div class="x-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-price-title font-bold">
+              {{
+                item.price | currency : 'IDR' : 'symbol' : '1.0-0' : 'id'
+              }}/</span
+            >
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" />
+          </div>
+        </div>
+      </div>
+      }}
     </div>
   </div>
 </div>

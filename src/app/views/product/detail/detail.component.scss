@@ -1,5 +1,6 @@
 .x-detail {
-  margin: 0 7rem;
+  margin: auto;
+  max-width: 70rem;
 
   .x-carousel {
     border-radius: 10px;
@@ -21,13 +22,14 @@
   }
 
   .x-detail-desc {
-    background: white;
+    // background: white;
     // height: 100%;
   }
 }
 
 .x-review {
-  margin: 0 6rem;
+  margin: auto;
+  max-width: 71.5rem;
 
   .x-review-card {
     .x-review-card-detail {
@@ -120,6 +122,43 @@
 .x-active {
   border: 2px solid #3563e9;
   padding: 3px;
+}
+
+.x-car-card {
+  background: white;
+  border-radius: 10px;
+
+  .x-title {
+    font-size: 1.2rem;
+  }
+
+  .x-sub-title {
+    font-size: 0.8rem;
+  }
+
+  .x-img {
+    margin: 7rem 0;
+  }
+
+  .x-info {
+    font-size: 0.9rem;
+    margin: auto 0;
+    text-wrap-mode: nowrap;
+  }
+
+  .x-price {
+    .x-price-title {
+      font-size: 1.2rem;
+      text-wrap-mode: nowrap;
+    }
+  }
+}
+
+.x-car-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(304px, 1fr));
+  // max-width: 71.5rem;
+  // margin: auto;
 }
 
 :host ::ng-deep .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {

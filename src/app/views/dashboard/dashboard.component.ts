@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit {
   doGetPopularList() {
     this.loadings.popularProduct = true
 
-    this.productService.getPopularList().subscribe({
+    this.productService.getPopularList(5).subscribe({
       next: (resp) => {
         if (resp.statusCode == StatusCode.SUCCESS) {
           this.popularList = resp.result

@@ -179,7 +179,12 @@
               >
             </div>
             <div class="col flex justify-content-end">
-              <p-button label="Rent Now " severity="primary" size="large" />
+              <p-button
+                label="Rent Now "
+                severity="primary"
+                size="large"
+                (click)="toOrderDetailPage()"
+              />
             </div>
           </div>
         </div>
@@ -195,10 +200,10 @@
         <p-badge [value]="reviewList.length" class="ml-2 mb-1" />
       </div>
       <div class="x-review-card">
-        @for (item of reviews; track $index) {
+        @for (item of reviewList; track $index) {
         <div class="x-review-card-detail mb-4">
           <p-avatar
-            [image]="item.imgSrc"
+            [image]="'item.imgSrc'"
             class="mr-2"
             size="xlarge"
             shape="circle"
@@ -209,7 +214,7 @@
                 item.name
               }}</span>
               <span style="color: #90a3bf">{{
-                item.reviewDate | date : 'longDate'
+                item.date | date : 'longDate'
               }}</span>
             </div>
             <p-rating

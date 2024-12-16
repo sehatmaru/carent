@@ -7,9 +7,9 @@ import {
   ProductListResponseModel,
   ProductSearchListResponseModel,
   ProductFilterCountListResponseModel,
-} from '../model/product-model'
-import { ProductDetailResponse } from '../model/product-detail-response'
-import { ProductReviewListResponse } from '../model/product-review-list-response'
+} from '../model/product/product-model'
+import { ProductDetailResponse } from '../model/product/product-detail-response'
+import { ProductReviewListResponse } from '../model/product/product-review-list-response'
 
 @Injectable({
   providedIn: 'root',

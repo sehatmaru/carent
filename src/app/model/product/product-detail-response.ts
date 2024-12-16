@@ -1,6 +1,6 @@
-import { Transmission } from '../enum/transmission.enum'
-import { VehicleBrand } from '../enum/vehicle-brand.enum'
-import { EngineType } from '../enum/engine-type.enum'
+import { Transmission } from '../../enum/transmission.enum'
+import { VehicleBrand } from '../../enum/vehicle-brand.enum'
+import { EngineType } from '../../enum/engine-type.enum'
 
 export class ProductDetailResponse {
   public id: number | null = null

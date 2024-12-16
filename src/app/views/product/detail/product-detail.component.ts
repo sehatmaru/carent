@@ -20,13 +20,13 @@ import { FieldsetModule } from 'primeng/fieldset'
 import { ProductService } from 'src/app/service/product.service'
 import { Utils } from 'src/app/utils/utils'
 import { StatusCode } from 'src/app/enum/status-code.enum'
-import { ProductDetailResponse } from 'src/app/model/product-detail-response'
+import { ProductDetailResponse } from 'src/app/model/product/product-detail-response'
 import { AvatarModule } from 'primeng/avatar'
-import { ProductListResponseModel } from 'src/app/model/product-model'
-import { ProductReviewListResponse } from 'src/app/model/product-review-list-response'
+import { ProductListResponseModel } from 'src/app/model/product/product-model'
+import { ProductReviewListResponse } from 'src/app/model/product/product-review-list-response'
 
 @Component({
-  selector: 'app-detail',
+  selector: 'app-product-detail',
   standalone: true,
   imports: [
     CommonModule,
@@ -48,10 +48,10 @@ import { ProductReviewListResponse } from 'src/app/model/product-review-list-res
     AvatarModule,
     FieldsetModule,
   ],
-  templateUrl: './detail.component.html',
-  styleUrl: './detail.component.scss',
+  templateUrl: './product-detail.component.html',
+  styleUrl: './product-detail.component.scss',
 })
-export class DetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit {
   public productService = inject(ProductService)
   public utils = inject(Utils)
   public router = inject(Router)
@@ -88,29 +88,6 @@ export class DetailComponent implements OnInit {
       id: 4,
       srcUrl: '../../../../assets/img/car-2.png',
       thumbnailUrl: '../../../../assets/img/car-2.png',
-    },
-  ]
-
-  public reviews = [
-    {
-      id: 1,
-      name: 'Alex',
-      reviewDate: new Date(),
-      rating: 4,
-      imgSrc:
-        'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png',
-      review:
-        'We are very happy with the service from the CARENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
-    },
-    {
-      id: 2,
-      name: 'Morgan',
-      reviewDate: new Date(),
-      rating: 5,
-      imgSrc:
-        'https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png',
-      review:
-        'We are greatly helped by the services of the CARENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
     },
   ]
 
@@ -209,7 +186,13 @@ export class DetailComponent implements OnInit {
   }
 
   toProductDetailPage(id: number) {
-    this.router.navigate(['/detail/' + id])
+    this.router.navigate(['/product/detail/' + id])
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  toOrderDetailPage() {
+    this.router.navigate(['/order/detail/' + this.productId])
 
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }

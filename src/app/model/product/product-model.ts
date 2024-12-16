@@ -1,7 +1,7 @@
-import { Transmission } from '../enum/transmission.enum'
-import { VehicleBrand } from '../enum/vehicle-brand.enum'
-import { ProductStatus } from '../enum/product-status.enum'
-import { EngineType } from '../enum/engine-type.enum'
+import { Transmission } from '../../enum/transmission.enum'
+import { VehicleBrand } from '../../enum/vehicle-brand.enum'
+import { ProductStatus } from '../../enum/product-status.enum'
+import { EngineType } from '../../enum/engine-type.enum'
 
 export class ProductSearchRequestModel {
   public id: number | null = null

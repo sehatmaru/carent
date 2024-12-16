@@ -18,7 +18,7 @@ import { GeoListResponseModel } from 'src/app/model/geo-model'
 import {
   ProductListResponseModel,
   ProductSearchRequestModel,
-} from 'src/app/model/product-model'
+} from 'src/app/model/product/product-model'
 import { ProductService } from 'src/app/service/product.service'
 import { PaginationRequestModel } from 'src/app/model/pagination-model'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -169,7 +169,7 @@ export class DashboardComponent implements OnInit {
   }
 
   toProductDetailPage(id: number) {
-    this.router.navigate(['/detail/' + id])
+    this.router.navigate(['/product/detail/' + id])
 
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  baseUrl: 'https://carent-be.onrender.com',
+  baseUrl: 'https://carent-be-cust.onrender.com',
 }
 
 /*

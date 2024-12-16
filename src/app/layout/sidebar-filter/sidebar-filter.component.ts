@@ -5,7 +5,7 @@ import { CheckboxModule } from 'primeng/checkbox'
 import {
   ProductFilterCountListResponseModel,
   ProductSearchRequestModel,
-} from 'src/app/model/product-model'
+} from 'src/app/model/product/product-model'
 import { CommonModule } from '@angular/common'
 import { FormsModule } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'

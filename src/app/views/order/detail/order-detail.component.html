@@ -1,0 +1,314 @@
+<div class="x-container">
+  <div class="x-order-container flex gap-5">
+    <div class="col" style="padding: 0">
+      <div class="x-card p-4 mb-4 grid-nogutter">
+        <span class="x-title">Billing Info</span>
+        <div class="flex justify-content-between mt-2 mb-4">
+          <span class="x-sub-title">Please enter your billing info</span>
+          <span class="x-sub-title">Step 1 of 4</span>
+        </div>
+        <div class="flex flex-column grid-nogutter">
+          <div class="flex justify-content-between">
+            <div class="flex flex-column col-6 gap-3 mb-4">
+              <span class="x-form-label">Name</span>
+              <input
+                type="text"
+                pInputText
+                [(ngModel)]="productOrderRequest.name"
+                variant="filled"
+                class="p-3 rounded-10"
+                pSize="large"
+              />
+            </div>
+            <div class="flex flex-column col-6 gap-3 mb-4">
+              <span class="x-form-label">Phone</span>
+              <p-inputMask
+                mask="+62 999-9999-99?99"
+                [(ngModel)]="productOrderRequest.phoneNumber"
+                placeholder="+62 xxx-xxxx-xxxx"
+                variant="filled"
+                styleClass="p-3 rounded-10 w-full"
+                size="large"
+              />
+            </div>
+          </div>
+          <div class="flex justify-content-between">
+            <div class="flex flex-column col-4 gap-3">
+              <span class="x-form-label">Province</span>
+
+              <p-dropdown
+                [options]="provinceList"
+                [(ngModel)]="productOrderRequest.province"
+                optionValue="id"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                [loading]="loadings.geoProvince"
+                (ngModelChange)="doGetRegencyList()"
+                styleClass="mr-3 p-2 rounded-10 w-full"
+                variant="filled"
+              >
+                <ng-template pTemplate="selectedItem" let-selectedOption>
+                  <div class="flex align-items-center gap-2">
+                    <div>{{ selectedOption.name }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+
+            <div class="flex flex-column col-4 gap-3">
+              <span class="x-form-label">Regency</span>
+              <p-dropdown
+                [options]="regencyList"
+                [(ngModel)]="productOrderRequest.regency"
+                optionValue="id"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                [loading]="loadings.geoRegency"
+                [disabled]="!productOrderRequest.province"
+                (ngModelChange)="doGetDistrictList()"
+                styleClass="p-2 rounded-10 w-full"
+                variant="filled"
+              >
+                <ng-template pTemplate="selectedItem" let-selectedOption>
+                  <div class="flex align-items-center gap-2">
+                    <div>{{ selectedOption.name }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+
+            <div class="flex flex-column col-4 gap-3">
+              <span class="x-form-label">District</span>
+
+              <p-dropdown
+                [options]="districtList"
+                [(ngModel)]="productOrderRequest.district"
+                optionValue="id"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                [loading]="loadings.geoDistrict"
+                [disabled]="!productOrderRequest.regency"
+                styleClass="mr-3 p-2 rounded-10 w-full"
+                variant="filled"
+              >
+                <ng-template pTemplate="selectedItem" let-selectedOption>
+                  <div class="flex align-items-center gap-2">
+                    <div>{{ selectedOption.name }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+          </div>
+
+          <div class="flex justify-content-between">
+            <div class="flex flex-column col-12 gap-3">
+              <span class="x-form-label">Address</span>
+              <textarea
+                pInputTextarea
+                [(ngModel)]="productOrderRequest.address"
+                [autoResize]="true"
+                class="mr-3 p-3 rounded-10 w-full"
+                variant="filled"
+              >
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="x-card p-4 grid-nogutter">
+        <span class="x-title">Billing Info</span>
+        <div class="flex justify-content-between mt-2 mb-4">
+          <span class="x-sub-title">Please enter your billing info</span>
+          <span class="x-sub-title">Step 1 of 4</span>
+        </div>
+        <div class="flex flex-column grid-nogutter">
+          <div class="flex justify-content-between">
+            <div class="flex flex-column col-6 gap-3 mb-4">
+              <span class="x-form-label">Name</span>
+              <input
+                type="text"
+                pInputText
+                [(ngModel)]="productOrderRequest.name"
+                variant="filled"
+                class="p-3 rounded-10"
+                pSize="large"
+              />
+            </div>
+            <div class="flex flex-column col-6 gap-3 mb-4">
+              <span class="x-form-label">Phone</span>
+              <p-inputMask
+                mask="+62 999-9999-99?99"
+                [(ngModel)]="productOrderRequest.phoneNumber"
+                placeholder="+62 xxx-xxxx-xxxx"
+                variant="filled"
+                styleClass="p-3 rounded-10 w-full"
+                size="large"
+              />
+            </div>
+          </div>
+          <div class="flex justify-content-between">
+            <div class="flex flex-column col-4 gap-3">
+              <span class="x-form-label">Province</span>
+
+              <p-dropdown
+                [options]="provinceList"
+                [(ngModel)]="productOrderRequest.province"
+                optionValue="id"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                [loading]="loadings.geoProvince"
+                (ngModelChange)="doGetRegencyList()"
+                styleClass="mr-3 p-2 rounded-10 w-full"
+                variant="filled"
+              >
+                <ng-template pTemplate="selectedItem" let-selectedOption>
+                  <div class="flex align-items-center gap-2">
+                    <div>{{ selectedOption.name }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+
+            <div class="flex flex-column col-4 gap-3">
+              <span class="x-form-label">Regency</span>
+              <p-dropdown
+                [options]="regencyList"
+                [(ngModel)]="productOrderRequest.regency"
+                optionValue="id"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                [loading]="loadings.geoRegency"
+                [disabled]="!productOrderRequest.province"
+                (ngModelChange)="doGetDistrictList()"
+                styleClass="p-2 rounded-10 w-full"
+                variant="filled"
+              >
+                <ng-template pTemplate="selectedItem" let-selectedOption>
+                  <div class="flex align-items-center gap-2">
+                    <div>{{ selectedOption.name }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+
+            <div class="flex flex-column col-4 gap-3">
+              <span class="x-form-label">District</span>
+
+              <p-dropdown
+                [options]="districtList"
+                [(ngModel)]="productOrderRequest.district"
+                optionValue="id"
+                optionLabel="name"
+                [filter]="true"
+                filterBy="name"
+                [showClear]="true"
+                [loading]="loadings.geoDistrict"
+                [disabled]="!productOrderRequest.regency"
+                styleClass="mr-3 p-2 rounded-10 w-full"
+                variant="filled"
+              >
+                <ng-template pTemplate="selectedItem" let-selectedOption>
+                  <div class="flex align-items-center gap-2">
+                    <div>{{ selectedOption.name }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+          </div>
+
+          <div class="flex justify-content-between">
+            <div class="flex flex-column col-12 gap-3">
+              <span class="x-form-label">Address</span>
+              <textarea
+                pInputTextarea
+                [(ngModel)]="productOrderRequest.address"
+                [autoResize]="true"
+                class="mr-3 p-3 rounded-10 w-full"
+                variant="filled"
+              >
+              </textarea>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div
+      class="x-card p-4 col-4 flex justify-content-between flex-column x-sticky"
+    >
+      <div class="flex flex-column mb-4">
+        <span class="x-title">Rental Summary</span>
+        <span class="x-sub-title mt-2"
+          >Prices may change depending on the length of the rental and the price
+          of your rental car.</span
+        >
+      </div>
+      <div class="mt-4 mb-4">
+        <span style="color: #596780; font-size: 20px; line-height: 2.5rem">{{
+          'NISMO has become the embodiment of Nissan outstanding performance, inspired by the most unforgiving proving ground, the race track.'
+        }}</span>
+      </div>
+      <div>
+        <div class="flex justify-content-between mb-4">
+          <span style="font-size: 20px; color: #90a3bf">Company</span>
+          <span style="font-size: 20px; color: #596780; font-weight: 500">{{
+            productDetailResponse.companyName
+          }}</span>
+          <!-- TO DO -->
+        </div>
+        <div class="x-detail-desc-spec mb-8">
+          <div class="flex justify-content-between">
+            <span class="x-detail-desc-spec-title">Brand</span>
+            <span class="x-detail-desc-spec-value">{{
+              productDetailResponse.brand
+            }}</span>
+          </div>
+          <div class="flex justify-content-between">
+            <span class="x-detail-desc-spec-title">Transmission</span>
+            <span class="x-detail-desc-spec-value">{{
+              productDetailResponse.transmission
+            }}</span>
+          </div>
+          <div class="flex justify-content-between">
+            <span class="x-detail-desc-spec-title">Engine</span>
+            <span class="x-detail-desc-spec-value">{{
+              productDetailResponse.engineType
+            }}</span>
+          </div>
+          <div class="flex justify-content-between">
+            <span class="x-detail-desc-spec-title">Capacity</span>
+            <span class="x-detail-desc-spec-value"
+              >{{ productDetailResponse.seat }} person</span
+            >
+          </div>
+        </div>
+        <div class="x-detail-price grid mt-2">
+          <div class="flex col m-auto">
+            <span class="x-detail-price-title font-bold">
+              {{
+                productDetailResponse.price
+                  | currency : 'IDR' : 'symbol' : '1.0-0' : 'id'
+              }}/</span
+            >
+            <span class="gray-text" style="font-size: 13px; margin-top: auto"
+              >day</span
+            >
+          </div>
+          <div class="col flex justify-content-end">
+            <p-button label="Rent Now " severity="primary" size="large" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+.x-card {
+  background: white;
+  border-radius: 10px;
+}
+
+.x-form-label {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.x-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.x-sub-title {
+  font-weight: 400;
+  color: #90a3bf;
+}
+
+.x-img {
+  margin: 7rem 0;
+}
+
+.x-info {
+  font-size: 0.9rem;
+  margin: auto 0;
+  text-wrap-mode: nowrap;
+}
+
+.x-price {
+  .x-price-title {
+    font-size: 1.2rem;
+    text-wrap-mode: nowrap;
+  }
+}
+
+.x-sticky {
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}

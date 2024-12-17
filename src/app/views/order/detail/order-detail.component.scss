@@ -9,17 +9,14 @@
 }
 
 .x-title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 
 .x-sub-title {
+  font-size: 0.9rem;
   font-weight: 400;
   color: #90a3bf;
-}
-
-.x-img {
-  margin: 7rem 0;
 }
 
 .x-info {
@@ -39,4 +36,12 @@
   position: sticky;
   top: 2rem;
   height: fit-content;
+}
+
+.x-img-preview {
+  object-fit: contain;
+}
+
+:host ::ng-deep .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
+  color: #fbad39 !important;
 }

@@ -16,6 +16,13 @@ import { ProductDetailResponse } from 'src/app/model/product/product-detail-resp
 import { ActivatedRoute } from '@angular/router'
 import { RatingModule } from 'primeng/rating'
 import { ButtonModule } from 'primeng/button'
+import { DividerModule } from 'primeng/divider'
+import { InputGroupModule } from 'primeng/inputgroup'
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon'
+import {
+  AutoCompleteCompleteEvent,
+  AutoCompleteModule,
+} from 'primeng/autocomplete'
 
 @Component({
   selector: 'app-order-detail',
@@ -30,6 +37,11 @@ import { ButtonModule } from 'primeng/button'
     DropdownModule,
     RatingModule,
     ButtonModule,
+    RatingModule,
+    DividerModule,
+    AutoCompleteModule,
+    InputGroupModule,
+    InputGroupAddonModule,
   ],
   templateUrl: './order-detail.component.html',
   styleUrl: './order-detail.component.scss',
@@ -45,7 +57,8 @@ export class OrderDetailComponent implements OnInit {
 
   public productId: number | null = null
 
-  public provinceList: GeoListResponseModel[] = []
+  public provinceList: any[] | undefined = []
+  public filteredProvince: any[] = []
   public regencyList: GeoListResponseModel[] = []
   public districtList: GeoListResponseModel[] = []
 
@@ -107,46 +120,62 @@ export class OrderDetailComponent implements OnInit {
   }
 
   doGetRegencyList() {
-    this.loadings.geoRegency = true
+    if (this.productOrderRequest.province) {
+      this.loadings.geoRegency = true
 
-    this.geoService
-      .getRegencyList(Number(this.productOrderRequest.province), '')
-      .subscribe({
-        next: (resp) => {
-          if (resp.statusCode == StatusCode.SUCCESS) {
-            this.regencyList = resp.result
-          } else {
-            this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
-          }
+      this.geoService
+        .getRegencyList(Number(this.productOrderRequest.province), '')
+        .subscribe({
+          next: (resp) => {
+            if (resp.statusCode == StatusCode.SUCCESS) {
+              this.regencyList = resp.result
+            } else {
+              this.utils.sendErrorToast(
+                resp.message,
+                resp.statusCode.toString()
+              )
+            }
 
-          this.loadings.geoRegency = false
-        },
-        error: (error) => {
-          this.utils.sendErrorToast(error.message)
-          this.loadings.geoRegency = false
-        },
-      })
+            this.loadings.geoRegency = false
+          },
+          error: (error) => {
+            this.utils.sendErrorToast(error.message)
+            this.loadings.geoRegency = false
+          },
+        })
+    } else {
+      this.productOrderRequest.regency = null
+      this.productOrderRequest.district = null
+    }
   }
 
   doGetDistrictList() {
-    this.loadings.geoDistrict = true
+    if (this.productOrderRequest.regency) {
+      this.loadings.geoDistrict = true
 
-    this.geoService
-      .getDistrictList(Number(this.productOrderRequest.regency), '')
-      .subscribe({
-        next: (resp) => {
-          if (resp.statusCode == StatusCode.SUCCESS) {
-            this.regencyList = resp.result
-          } else {
-            this.utils.sendErrorToast(resp.message, resp.statusCode.toString())
-          }
+      this.geoService
+        .getDistrictList(Number(this.productOrderRequest.regency), '')
+        .subscribe({
+          next: (resp) => {
+            if (resp.statusCode == StatusCode.SUCCESS) {
+              this.districtList = resp.result
+            } else {
+              this.utils.sendErrorToast(
+                resp.message,
+                resp.statusCode.toString()
+              )
+            }
 
-          this.loadings.geoDistrict = false
-        },
-        error: (error) => {
-          this.utils.sendErrorToast(error.message)
-          this.loadings.geoDistrict = false
-        },
-      })
+            this.loadings.geoDistrict = false
+          },
+          error: (error) => {
+            this.utils.sendErrorToast(error.message)
+            this.loadings.geoDistrict = false
+          },
+        })
+    } else {
+      this.productOrderRequest.regency = null
+      this.productOrderRequest.district = null
+    }
   }
 }

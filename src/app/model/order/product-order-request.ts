@@ -10,6 +10,7 @@ export class ProductOrderRequest {
   public regency: string | null = null
   public district: string | null = null
   public name: string | null = null
+  public voucherCode: string | null = null
   public priceStart: number | null = null
   public priceEnd: number | null = null
   public provinceId: number | null = null

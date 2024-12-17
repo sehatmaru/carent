@@ -32,10 +32,19 @@ body {
   padding: 2.5rem 4.5rem 2.5rem 4.5rem;
 }
 
+.x-dropdown {
+  max-width: 19rem;
+  width: 100%;
+}
+
 .p-card {
   border-radius: 10px !important;
 }
 
 .rounded-10 {
   border-radius: 10px;
+}
+
+.x-h-full {
+  height: -webkit-fill-available;
 }

@@ -5,10 +5,18 @@ import { VehicleBrand } from 'src/app/enum/vehicle-brand.enum'
 
 export class ProductOrderRequest {
   public address: string | null = null
+  public delivery: string | null = 'Self Pickup'
   public phoneNumber: string | null = null
   public province: string | null = null
   public regency: string | null = null
   public district: string | null = null
+  public pickUpAddress: string | null = null
+  public dropOffAddress: string | null = null
+  public paymentMethod: string | null = null
+  public cardNumber: string | null = null
+  public cardExpirationDate: string | null = null
+  public cardHolderName: string | null = null
+  public cardCvc: string | null = null
   public name: string | null = null
   public voucherCode: string | null = null
   public priceStart: number | null = null
@@ -23,7 +31,9 @@ export class ProductOrderRequest {
   public brand: VehicleBrand[] = []
   public engineType: EngineType[] = []
   public startDate: Date | null = null
+  public startTime: Date | null = null
   public endDate: Date | null = null
+  public endTime: Date | null = null
   public deliverable: boolean[] = []
   public status: ProductStatus | null = null
   public time: Date | null = null

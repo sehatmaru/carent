@@ -17,12 +17,12 @@ import { ActivatedRoute } from '@angular/router'
 import { RatingModule } from 'primeng/rating'
 import { ButtonModule } from 'primeng/button'
 import { DividerModule } from 'primeng/divider'
-import { InputGroupModule } from 'primeng/inputgroup'
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon'
-import {
-  AutoCompleteCompleteEvent,
-  AutoCompleteModule,
-} from 'primeng/autocomplete'
+import { SelectButtonModule } from 'primeng/selectbutton'
+import { CalendarModule } from 'primeng/calendar'
+import { AccordionModule } from 'primeng/accordion'
+import { AvatarModule } from 'primeng/avatar'
+import { BadgeModule } from 'primeng/badge'
+import { RadioButtonModule } from 'primeng/radiobutton'
 
 @Component({
   selector: 'app-order-detail',
@@ -39,9 +39,12 @@ import {
     ButtonModule,
     RatingModule,
     DividerModule,
-    AutoCompleteModule,
-    InputGroupModule,
-    InputGroupAddonModule,
+    SelectButtonModule,
+    CalendarModule,
+    AccordionModule,
+    AvatarModule,
+    BadgeModule,
+    RadioButtonModule,
   ],
   templateUrl: './order-detail.component.html',
   styleUrl: './order-detail.component.scss',
@@ -56,11 +59,14 @@ export class OrderDetailComponent implements OnInit {
   public productDetailResponse = new ProductDetailResponse()
 
   public productId: number | null = null
+  public selectedPaymentMethod: number | null = null
 
   public provinceList: any[] | undefined = []
   public filteredProvince: any[] = []
   public regencyList: GeoListResponseModel[] = []
   public districtList: GeoListResponseModel[] = []
+
+  public minDate = new Date()
 
   public loadings = {
     geoProvince: false,
@@ -177,5 +183,24 @@ export class OrderDetailComponent implements OnInit {
       this.productOrderRequest.regency = null
       this.productOrderRequest.district = null
     }
+  }
+
+  selectPaymentMethod(id: any) {
+    console.log(this.selectedPaymentMethod)
+    console.log(id)
+
+    this.selectedPaymentMethod = id
+
+    if (id == 0) {
+      this.productOrderRequest.paymentMethod = 'Credit Card'
+    } else if (id == 1) {
+      this.productOrderRequest.paymentMethod = 'PayPal'
+    } else if (id == 2) {
+      this.productOrderRequest.paymentMethod = 'Bitcoin'
+    } else {
+      this.productOrderRequest.paymentMethod = null
+    }
+
+    console.log(this.productOrderRequest.paymentMethod)
   }
 }

@@ -19,12 +19,6 @@
   color: #90a3bf;
 }
 
-.x-info {
-  font-size: 0.9rem;
-  margin: auto 0;
-  text-wrap-mode: nowrap;
-}
-
 .x-price {
   .x-price-title {
     font-size: 1.2rem;
@@ -45,3 +39,36 @@
 :host ::ng-deep .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
   color: #fbad39 !important;
 }
+
+:host ::ng-deep .p-accordion p-accordiontab .p-accordion-tab {
+  border-bottom: none !important;
+  margin-top: 1.5rem;
+}
+
+:host ::ng-deep .p-accordion .p-accordion-header .p-accordion-header-link {
+  background: #f6f7f9 !important;
+}
+
+:host ::ng-deep .p-accordion .p-accordioncontent-content {
+  background: red !important;
+}
+
+:host ::ng-deep .p-accordion p-accordiontab .p-accordion-content {
+  background: #f6f7f9 !important;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+:host
+  ::ng-deep
+  .p-accordion
+  .p-accordion-tab-active
+  > .p-toggleable-content:not(.ng-animating) {
+  background: #f6f7f9 !important;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+}
+
+// :host ::ng-deep .p-accordion .p-accordion-header .p-accordion-header-link {
+//   border-radius: 10px !important;
+// }

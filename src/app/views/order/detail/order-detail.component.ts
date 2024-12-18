@@ -20,9 +20,8 @@ import { DividerModule } from 'primeng/divider'
 import { SelectButtonModule } from 'primeng/selectbutton'
 import { CalendarModule } from 'primeng/calendar'
 import { AccordionModule } from 'primeng/accordion'
-import { AvatarModule } from 'primeng/avatar'
-import { BadgeModule } from 'primeng/badge'
 import { RadioButtonModule } from 'primeng/radiobutton'
+import { CheckboxModule } from 'primeng/checkbox'
 
 @Component({
   selector: 'app-order-detail',
@@ -42,9 +41,8 @@ import { RadioButtonModule } from 'primeng/radiobutton'
     SelectButtonModule,
     CalendarModule,
     AccordionModule,
-    AvatarModule,
-    BadgeModule,
     RadioButtonModule,
+    CheckboxModule,
   ],
   templateUrl: './order-detail.component.html',
   styleUrl: './order-detail.component.scss',
@@ -202,5 +200,9 @@ export class OrderDetailComponent implements OnInit {
     }
 
     console.log(this.productOrderRequest.paymentMethod)
+  }
+
+  doSentOrder() {
+    console.log(this.productOrderRequest)
   }
 }

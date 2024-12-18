@@ -17,7 +17,8 @@
                 [(ngModel)]="productOrderRequest.name"
                 variant="filled"
                 class="p-3 rounded-10"
-                pSize="large"
+                [class.ng-invalid]="!productOrderRequest.name"
+                [class.ng-dirty]="!productOrderRequest.name"
               />
             </div>
             <div class="flex flex-column col-6 gap-3">
@@ -29,6 +30,8 @@
                 variant="filled"
                 styleClass="p-3 rounded-10 w-full"
                 size="large"
+                [class.ng-invalid]="!productOrderRequest.phoneNumber"
+                [class.ng-dirty]="!productOrderRequest.phoneNumber"
               />
             </div>
           </div>
@@ -49,6 +52,8 @@
                 [readonly]="productOrderRequest.province"
                 styleClass="p-2 rounded-10 x-dropdown"
                 variant="filled"
+                [class.ng-invalid]="!productOrderRequest.province"
+                [class.ng-dirty]="!productOrderRequest.province"
               >
                 <ng-template pTemplate="selectedItem" let-selectedOption>
                   <div class="flex align-items-center gap-2">
@@ -75,6 +80,8 @@
                 (onChange)="doGetDistrictList()"
                 styleClass="p-2 rounded-10  x-dropdown"
                 variant="filled"
+                [class.ng-invalid]="!productOrderRequest.regency"
+                [class.ng-dirty]="!productOrderRequest.regency"
               >
                 <ng-template pTemplate="selectedItem" let-selectedOption>
                   <div class="flex align-items-center gap-2">
@@ -99,6 +106,8 @@
                 [disabled]="!productOrderRequest.regency"
                 styleClass="mr-3 p-2 rounded-10  x-dropdown"
                 variant="filled"
+                [class.ng-invalid]="!productOrderRequest.district"
+                [class.ng-dirty]="!productOrderRequest.district"
               >
                 <ng-template pTemplate="selectedItem" let-selectedOption>
                   <div class="flex align-items-center gap-2">
@@ -118,6 +127,8 @@
                 [autoResize]="true"
                 class="mr-3 p-3 rounded-10 w-full"
                 variant="filled"
+                [class.ng-invalid]="!productOrderRequest.address"
+                [class.ng-dirty]="!productOrderRequest.address"
               >
               </textarea>
             </div>
@@ -159,6 +170,8 @@
                   variant="filled"
                   [showButtonBar]="true"
                   [minDate]="minDate"
+                  [class.ng-invalid]="!productOrderRequest.startDate"
+                  [class.ng-dirty]="!productOrderRequest.startDate"
                 />
               </div>
 
@@ -174,6 +187,8 @@
                   styleClass="w-full"
                   variant="filled"
                   icon="clock"
+                  [class.ng-invalid]="!productOrderRequest.startTime"
+                  [class.ng-dirty]="!productOrderRequest.startTime"
                 />
               </div>
             </div>
@@ -188,6 +203,8 @@
                   [autoResize]="true"
                   class="mr-3 p-3 rounded-10 w-full"
                   variant="filled"
+                  [class.ng-invalid]="!productOrderRequest.pickUpAddress"
+                  [class.ng-dirty]="!productOrderRequest.pickUpAddress"
                 >
                 </textarea>
               </div>
@@ -220,6 +237,8 @@
                   variant="filled"
                   [showButtonBar]="true"
                   [minDate]="productOrderRequest.startDate"
+                  [class.ng-invalid]="!productOrderRequest.endDate"
+                  [class.ng-dirty]="!productOrderRequest.endDate"
                 />
               </div>
 
@@ -240,6 +259,8 @@
                   styleClass="w-full"
                   variant="filled"
                   icon="clock"
+                  [class.ng-invalid]="!productOrderRequest.endTime"
+                  [class.ng-dirty]="!productOrderRequest.endTime"
                 />
               </div>
             </div>
@@ -254,6 +275,8 @@
                   [autoResize]="true"
                   class="mr-3 p-3 rounded-10 w-full"
                   variant="filled"
+                  [class.ng-invalid]="!productOrderRequest.dropOffAddress"
+                  [class.ng-dirty]="!productOrderRequest.dropOffAddress"
                 >
                 </textarea>
               </div>
@@ -302,6 +325,8 @@
                       variant="filled"
                       styleClass="p-3 rounded-10 w-full"
                       size="large"
+                      [class.ng-invalid]="!productOrderRequest.cardNumber"
+                      [class.ng-dirty]="!productOrderRequest.cardNumber"
                     />
                   </div>
                   <div class="flex flex-column col-6 gap-3">
@@ -313,6 +338,10 @@
                       variant="filled"
                       styleClass="p-3 rounded-10 w-full"
                       size="large"
+                      [class.ng-invalid]="
+                        !productOrderRequest.cardExpirationDate
+                      "
+                      [class.ng-dirty]="!productOrderRequest.cardExpirationDate"
                     />
                   </div>
                 </div>
@@ -326,6 +355,8 @@
                       variant="filled"
                       class="p-3 rounded-10"
                       pSize="large"
+                      [class.ng-invalid]="!productOrderRequest.cardHolderName"
+                      [class.ng-dirty]="!productOrderRequest.cardHolderName"
                     />
                   </div>
                   <div class="flex flex-column col-6 gap-3">
@@ -337,6 +368,8 @@
                       variant="filled"
                       styleClass="p-3 rounded-10 w-full"
                       size="large"
+                      [class.ng-invalid]="!productOrderRequest.cardCvc"
+                      [class.ng-dirty]="!productOrderRequest.cardCvc"
                     />
                   </div>
                 </div>
@@ -384,6 +417,58 @@
               </p>
             </p-accordionTab>
           </p-accordion>
+        </div>
+      </div>
+      <div class="x-card p-4 mb-4 grid-nogutter">
+        <span class="x-title">Confirmation</span>
+        <div class="flex justify-content-between mt-2 mb-4">
+          <span class="x-sub-title"
+            >We are getting to the end. Just few clicks and your rental is
+            ready!</span
+          >
+          <span class="x-sub-title">Step 4 of 4</span>
+        </div>
+        <div class="flex flex-column grid-nogutter">
+          <div
+            class="flex p-3 rounded-10 mt-2 mb-4"
+            style="background: #f6f7f9"
+          >
+            <p-checkbox
+              [(ngModel)]="productOrderRequest.isSubsNewsletter"
+              [value]="true"
+            />
+            <label class="ml-2"
+              >I agree with sending an Marketing and newsletter emails. No spam,
+              promissed!</label
+            >
+          </div>
+          <div class="flex p-3 rounded-10 mb-4" style="background: #f6f7f9">
+            <p-checkbox
+              [(ngModel)]="productOrderRequest.isTncAgree"
+              [value]="true"
+            />
+            <label class="ml-2"
+              >I agree with our terms and conditions and privacy policy.</label
+            >
+          </div>
+          <p-button
+            label="Rent Now"
+            size="large"
+            class="mb-4"
+            [disabled]="!productOrderRequest.isTncAgree"
+            (onClick)="doSentOrder()"
+          />
+          <div class="flex flex-column gap-3">
+            <img
+              src="../../../../assets/img/ic-security-safety.png"
+              style="width: max-content"
+            />
+            <label>All your data are safe</label>
+            <label class="x-sub-title"
+              >We are using the most advanced security to provide you the best
+              experience ever.</label
+            >
+          </div>
         </div>
       </div>
     </div>

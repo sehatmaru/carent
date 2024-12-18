@@ -7,6 +7,8 @@ export class ProductOrderRequest {
   public address: string | null = null
   public delivery: string | null = 'Self Pickup'
   public phoneNumber: string | null = null
+  public isSubsNewsletter = false
+  public isTncAgree = false
   public province: string | null = null
   public regency: string | null = null
   public district: string | null = null
